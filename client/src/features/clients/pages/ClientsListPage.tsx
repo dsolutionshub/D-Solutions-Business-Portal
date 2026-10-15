@@ -2,7 +2,6 @@ import { CLIENT_SORTS, type ClientListItem } from '@dsol/shared';
 import { ArchiveRestore, Download, Eye, Pencil, Plus, Trash2, Users } from 'lucide-react';
 import { useState } from 'react';
 import { Link } from 'react-router';
-import { ClientLogo } from '@/components/common/ClientLogo';
 import { ConfirmDialog } from '@/components/common/ConfirmDialog';
 import { DataTable, type Column } from '@/components/common/DataTable';
 import { DateWithDaysLeft } from '@/components/common/DateWithDaysLeft';
@@ -55,7 +54,6 @@ export function ClientsListPage() {
       sortable: true,
       cell: c => (
         <div className="flex items-center gap-2.5">
-          <ClientLogo name={c.name} color={c.color} logoUrl={c.logoUrl} size={36} wide={2} />
           <div className="min-w-0">
             <Link
               to={`/clients/${c.id}`}

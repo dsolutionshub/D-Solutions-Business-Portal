@@ -11,6 +11,7 @@ import {
   Phone,
   Receipt,
   Tag,
+  UserRound,
   Youtube,
   type LucideIcon
 } from 'lucide-react';
@@ -122,33 +123,31 @@ export function OverviewTab({ client: c }: { client: ClientView }) {
       <div className="flex min-w-0 flex-[1_1_280px] flex-col gap-4">
         <Box title="Primary contact">
           {p ? (
-            <div className="grid gap-3">
-              <div>
-                <div className="font-semibold">{p.name}</div>
-                {p.role && <div className="text-xs text-muted-foreground">{p.role}</div>}
-              </div>
-              <ul className="grid gap-3">
-                <Item icon={Mail} label="Email">
-                  <a href={`mailto:${p.email}`} className={linkClass}>
-                    {p.email}
+            <ul className="grid gap-3">
+              <Item icon={UserRound} label="Name">
+                <span className="font-semibold">{p.name}</span>
+                {p.role && <span className="text-muted-foreground"> · {p.role}</span>}
+              </Item>
+              <Item icon={Mail} label="Email">
+                <a href={`mailto:${p.email}`} className={linkClass}>
+                  {p.email}
+                </a>
+              </Item>
+              {p.phone && (
+                <Item icon={Phone} label="Phone">
+                  <a href={`tel:${p.phone.replace(/\s/g, '')}`} className={linkClass}>
+                    {p.phone}
                   </a>
                 </Item>
-                {p.phone && (
-                  <Item icon={Phone} label="Phone">
-                    <a href={`tel:${p.phone.replace(/\s/g, '')}`} className={linkClass}>
-                      {p.phone}
-                    </a>
-                  </Item>
-                )}
-                {p.altPhone && (
-                  <Item icon={Phone} label="Alternative phone">
-                    <a href={`tel:${p.altPhone.replace(/\s/g, '')}`} className={linkClass}>
-                      {p.altPhone}
-                    </a>
-                  </Item>
-                )}
-              </ul>
-            </div>
+              )}
+              {p.altPhone && (
+                <Item icon={Phone} label="Alternative phone">
+                  <a href={`tel:${p.altPhone.replace(/\s/g, '')}`} className={linkClass}>
+                    {p.altPhone}
+                  </a>
+                </Item>
+              )}
+            </ul>
           ) : (
             <p className="text-sm text-muted-foreground">No primary contact.</p>
           )}
