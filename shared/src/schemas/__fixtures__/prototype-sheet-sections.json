@@ -1,0 +1,183 @@
+[
+  {
+    "key": "links",
+    "title": "Website & API URLs",
+    "desc": "Where the store and its backend run, per environment.",
+    "fields": [
+      [
+        "prod",
+        "Production URL",
+        "url",
+        {
+          "req": true
+        }
+      ],
+      ["staging", "Staging URL", "url"],
+      ["admin", "Admin panel URL", "url"],
+      ["api", "Backend API URL (production)", "url"],
+      ["apiStaging", "Backend API URL (staging)", "url"],
+      ["repo", "Code repository", "text"]
+    ]
+  },
+  {
+    "key": "domain",
+    "title": "Domain & SSL",
+    "desc": "Where and when the domain was bought, when it expires, and the SSL certificate.",
+    "fields": [
+      ["name", "Domain name", "domain"],
+      [
+        "registrar",
+        "Purchased from (registrar)",
+        "select",
+        {
+          "list": "registrar"
+        }
+      ],
+      [
+        "account",
+        "Registrar login (email / username)",
+        "text",
+        {
+          "vault": true
+        }
+      ],
+      ["password", "Registrar password", "secret"],
+      ["purchased", "Purchase date", "date"],
+      ["expiry", "Domain expiry date", "date"],
+      ["cost", "Purchase cost (₹)", "money"],
+      ["renewal", "Renewal cost per year (₹)", "money"],
+      [
+        "auto",
+        "Auto-renew",
+        "select",
+        {
+          "options": ["Off", "On"]
+        }
+      ],
+      ["dns", "DNS managed at", "text"],
+      ["sslProvider", "SSL certificate", "text"],
+      ["sslExpiry", "SSL expiry date", "date"],
+      ["sslCost", "SSL cost per year (₹)", "money"]
+    ]
+  },
+  {
+    "key": "hosting",
+    "title": "Backend deployment & hosting",
+    "desc": "Hosting platform, plan and what it costs.",
+    "fields": [
+      [
+        "platform",
+        "Hosting platform",
+        "select",
+        {
+          "list": "hosting"
+        }
+      ],
+      ["plan", "Plan / instance", "text"],
+      ["region", "Region", "text"],
+      ["ip", "Server IP", "text"],
+      [
+        "account",
+        "Hosting login (email / username)",
+        "text",
+        {
+          "vault": true
+        }
+      ],
+      ["password", "Hosting password", "secret"],
+      ["cost", "Hosting cost (₹)", "money"],
+      [
+        "cycle",
+        "Billing cycle",
+        "select",
+        {
+          "options": ["Monthly", "Yearly"]
+        }
+      ],
+      ["nextBill", "Next billing / renewal date", "date"]
+    ]
+  },
+  {
+    "key": "db",
+    "title": "Database",
+    "desc": "Which database, and the access details needed to check tables.",
+    "fields": [
+      [
+        "engine",
+        "Database",
+        "select",
+        {
+          "list": "database"
+        }
+      ],
+      ["host", "Host", "text"],
+      ["port", "Port", "text"],
+      ["name", "Database name", "text"],
+      [
+        "user",
+        "Username",
+        "text",
+        {
+          "vault": true
+        }
+      ],
+      ["password", "Password / access key", "secret"],
+      ["conn", "Connection string", "secret"],
+      ["console", "DB console URL (to view tables)", "url"],
+      ["backup", "Backups", "text"]
+    ]
+  },
+  {
+    "key": "keys",
+    "title": "E-commerce keys & integrations",
+    "desc": "Login, payment, shipping and tracking IDs used by the store.",
+    "fields": [
+      [
+        "googleClientId",
+        "Google login — client ID",
+        "text",
+        {
+          "vault": true
+        }
+      ],
+      ["googleSecret", "Google login — client secret", "secret"],
+      [
+        "payGateway",
+        "Payment gateway",
+        "select",
+        {
+          "list": "payGateway"
+        }
+      ],
+      [
+        "payKeyId",
+        "Payment key ID / merchant ID",
+        "text",
+        {
+          "vault": true
+        }
+      ],
+      ["paySecret", "Payment secret key", "secret"],
+      ["webhookSecret", "Payment webhook secret", "secret"],
+      ["shipping", "Shipping provider", "text"],
+      ["shippingKey", "Shipping API key", "secret"],
+      [
+        "ga4",
+        "Google Analytics ID",
+        "text",
+        {
+          "vault": true
+        }
+      ],
+      [
+        "pixel",
+        "Meta (Facebook) Pixel ID",
+        "text",
+        {
+          "vault": true
+        }
+      ],
+      ["smsKey", "SMS / WhatsApp API key", "secret"]
+    ]
+  }
+]

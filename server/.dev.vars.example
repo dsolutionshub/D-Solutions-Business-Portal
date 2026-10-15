@@ -1,0 +1,18 @@
+# Local-only Worker variables. Copy to .dev.vars (gitignored) — never commit real values.
+ENVIRONMENT=development
+# Your work email: `npm run db:seed` makes it the one Owner sign-in (http://localhost:5173/login).
+DEV_USER_EMAIL=you@example.com
+# Your name and password for that sign-in (10+ characters, not a common password). Leave
+# SEED_PASSWORD empty and the seed generates a strong one and prints it.
+SEED_OWNER_NAME=Your Name
+SEED_PASSWORD=
+# Company name for Settings (the rest you fill in under Settings → Company & invoicing).
+SEED_COMPANY=D Solutions
+# AES-256 key for project secrets: run `npm run gen:key` and paste the output here.
+# Changing it makes already-encrypted secrets unreadable (re-run `npm run db:seed` locally — it wipes the local database).
+ENCRYPTION_KEY=
+# Brevo transactional email key. Leave empty locally: emails are then printed to the console
+# and saved as "Logged (dev)" instead of being sent.
+BREVO_API_KEY=
+# Where the app runs locally — used for invoice/receipt links in emails.
+APP_URL=http://localhost:5173

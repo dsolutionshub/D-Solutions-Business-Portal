@@ -1,0 +1,107 @@
+# Cloudflare Worker for the D Solutions Business Portal API.
+#
+#   local:       `npm run dev` (uses the top level below + server/.dev.vars)
+#   staging:     `npm run deploy:server:staging`     → [env.staging]
+#   production:  `npm run deploy:server:prod`        → [env.production]
+#
+# Secrets are NOT set here. Per environment:
+#   npx wrangler secret put ENCRYPTION_KEY --env production
+#   npx wrangler secret put BREVO_API_KEY  --env production
+# Everything marked REPLACE is filled in during docs/DEPLOY.md (npm run setup:prod prints the ids).
+
+name = "dsol-portal-api"
+main = "src/index.ts"
+compatibility_date = "2025-09-01"
+# The top level is for `wrangler dev` only (its database_id is a placeholder, so a deploy without
+# --env fails). workers_dev = false: no public *.workers.dev address for the API.
+workers_dev = false
+
+[vars]
+ENVIRONMENT = "production"   # server/.dev.vars sets development locally
+EMAIL_FROM_ADDRESS = "no-reply@example.com"
+EMAIL_FROM_NAME = "D Solutions"
+APP_URL = "http://localhost:5173"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "dsol-portal"
+database_id = "00000000-0000-0000-0000-000000000000" # local dev ignores it
+migrations_dir = "migrations"
+
+[[r2_buckets]]
+binding = "FILES"
+bucket_name = "dsol-portal-files"
+
+[triggers]
+# 02:30 UTC = 08:00 IST — daily reminder digests, client overdue reminders, scheduled emails.
+# Every 15 minutes — send scheduled emails whose time has come (nothing else).
+crons = ["30 2 * * *", "*/15 * * * *"]
+
+[observability]
+enabled = true
+
+# ───────────────────────────────────────────────────────────── staging ──
+[env.staging]
+name = "dsol-portal-api-staging"
+workers_dev = false
+# The API lives on the same origin as the app: staging.<your-domain>/api/* → this Worker,
+# everything else → the Pages project. One Cloudflare Access application covers both.
+routes = [{ pattern = "staging.example.com/api/*", zone_name = "example.com" }] # REPLACE domain
+
+[env.staging.vars]
+ENVIRONMENT = "staging"
+APP_URL = "https://staging.example.com"                     # REPLACE
+# Optional: only if Cloudflare Access sits in front (docs/DEPLOY.md step 7). Empty = portal passwords only.
+ACCESS_TEAM_DOMAIN = ""   # e.g. "your-team.cloudflareaccess.com"
+ACCESS_AUD = ""           # the staging Access application's AUD tag
+EMAIL_FROM_ADDRESS = "no-reply@example.com"                 # REPLACE (a sender verified in Brevo)
+EMAIL_FROM_NAME = "D Solutions (staging)"
+CORS_ORIGINS = ""
+
+[[env.staging.d1_databases]]
+binding = "DB"
+database_name = "dsol-portal-staging"
+database_id = "REPLACE-with-staging-database-id"
+migrations_dir = "migrations"
+
+[[env.staging.r2_buckets]]
+binding = "FILES"
+bucket_name = "dsol-portal-files-staging"
+
+[env.staging.triggers]
+crons = ["30 2 * * *", "*/15 * * * *"]
+
+[env.staging.observability]
+enabled = true
+
+# ────────────────────────────────────────────────────────── production ──
+[env.production]
+name = "dsol-portal-api"
+workers_dev = false
+routes = [{ pattern = "app.example.com/api/*", zone_name = "example.com" }] # REPLACE domain
+
+[env.production.vars]
+ENVIRONMENT = "production"
+APP_URL = "https://app.example.com"                            # REPLACE
+# Optional: only if Cloudflare Access sits in front. Empty = portal passwords only.
+ACCESS_TEAM_DOMAIN = ""   # e.g. "your-team.cloudflareaccess.com"
+ACCESS_AUD = ""           # the production Access application's AUD tag
+EMAIL_FROM_ADDRESS = "no-reply@example.com"                    # REPLACE
+EMAIL_FROM_NAME = "D Solutions"
+CORS_ORIGINS = ""
+
+[[env.production.d1_databases]]
+binding = "DB"
+database_name = "dsol-portal-prod"
+database_id = "REPLACE-with-production-database-id"
+migrations_dir = "migrations"
+
+[[env.production.r2_buckets]]
+binding = "FILES"
+bucket_name = "dsol-portal-files-prod"
+
+[env.production.triggers]
+crons = ["30 2 * * *", "*/15 * * * *"]
+
+[env.production.observability]
+enabled = true

@@ -1,0 +1,2238 @@
+{
+  "team": {
+    "KN": {
+      "name": "Karthi Nanjundeswaran",
+      "short": "Karthi N.",
+      "role": "Owner"
+    },
+    "DR": {
+      "name": "Divya Raman",
+      "short": "Divya R.",
+      "role": "Admin"
+    },
+    "SK": {
+      "name": "Sanjay Kumar",
+      "short": "Sanjay K.",
+      "role": "Developer"
+    },
+    "FA": {
+      "name": "Farah Ahmed",
+      "short": "Farah A.",
+      "role": "Developer"
+    },
+    "NJ": {
+      "name": "Neha Joshi",
+      "short": "Neha J.",
+      "role": "Developer"
+    },
+    "VP": {
+      "name": "Vikram Pillai",
+      "short": "Vikram P.",
+      "role": "Accounts"
+    }
+  },
+  "users": [
+    {
+      "id": "u1",
+      "code": "KN",
+      "name": "Karthi Nanjundeswaran",
+      "email": "{{OWNER_EMAIL}}",
+      "role": "Owner",
+      "status": "Active",
+      "last": "Now",
+      "projects": ["All"]
+    },
+    {
+      "id": "u2",
+      "code": "DR",
+      "name": "Divya Raman",
+      "email": "divya.r@dsolutions.example",
+      "role": "Admin",
+      "status": "Active",
+      "last": "Today, 9:41 AM",
+      "projects": ["p10", "p1", "p6"]
+    },
+    {
+      "id": "u3",
+      "code": "SK",
+      "name": "Sanjay Kumar",
+      "email": "sanjay.k@dsolutions.example",
+      "role": "Developer",
+      "status": "Active",
+      "last": "Today, 7:20 AM",
+      "projects": ["p1", "p2", "p4", "p6", "p8", "p11"]
+    },
+    {
+      "id": "u4",
+      "code": "FA",
+      "name": "Farah Ahmed",
+      "email": "farah.a@dsolutions.example",
+      "role": "Developer",
+      "status": "Active",
+      "last": "Today, 10:58 AM",
+      "projects": ["p1", "p2", "p5", "p7", "p8", "p9"]
+    },
+    {
+      "id": "u5",
+      "code": "NJ",
+      "name": "Neha Joshi",
+      "email": "neha.j@dsolutions.example",
+      "role": "Developer",
+      "status": "Active",
+      "last": "Yesterday",
+      "projects": ["p1", "p3", "p4", "p6", "p10"]
+    },
+    {
+      "id": "u6",
+      "code": "VP",
+      "name": "Vikram Pillai",
+      "email": "vikram.p@dsolutions.example",
+      "role": "Accounts",
+      "status": "Active",
+      "last": "Today, 10:42 AM",
+      "projects": []
+    },
+    {
+      "id": "u7",
+      "code": "AM",
+      "name": "Arvind Menon",
+      "email": "arvind.m@dsolutions.example",
+      "role": "Developer",
+      "status": "Invited",
+      "last": "—",
+      "projects": ["p8"]
+    }
+  ],
+  "settings": {
+    "company": "D Solutions",
+    "address": "[Company address]",
+    "gstin": "[YOUR GSTIN]",
+    "bank": "[Bank name] · A/c [account no.] · IFSC [IFSC]",
+    "upi": "[UPI ID]",
+    "prefix": "INV-2026-",
+    "nextNo": 149,
+    "hourlyRate": 1500,
+    "reminders": [30, 14, 7, 1]
+  },
+  "lists": {
+    "environments": ["DEV", "QA", "STG", "PROD"],
+    "hosting": [
+      "AWS",
+      "Vercel",
+      "DigitalOcean",
+      "Google Cloud",
+      "Azure",
+      "Railway",
+      "Render",
+      "Netlify",
+      "Hostinger",
+      "Shopify",
+      "Supabase",
+      "Other"
+    ],
+    "registrar": [
+      "GoDaddy",
+      "Namecheap",
+      "Cloudflare",
+      "Hostinger",
+      "BigRock",
+      "Google Domains / Squarespace",
+      "Other"
+    ],
+    "database": [
+      "PostgreSQL",
+      "MySQL",
+      "MariaDB",
+      "MongoDB",
+      "Supabase (Postgres)",
+      "Firebase Firestore",
+      "SQL Server",
+      "Redis",
+      "Other"
+    ],
+    "payGateway": [
+      "Razorpay",
+      "Stripe",
+      "PayU",
+      "Cashfree",
+      "PhonePe",
+      "CCAvenue",
+      "Paytm",
+      "Shopify Payments",
+      "Other"
+    ],
+    "projectType": ["E-commerce storefront", "Mobile app", "Admin / back-office", "API / integration"],
+    "businessType": [
+      "D2C brand",
+      "Online retail",
+      "Marketplace seller",
+      "Subscription commerce",
+      "Cloud kitchen",
+      "B2B wholesale"
+    ],
+    "industry": [
+      "Food & wellness",
+      "Fashion & apparel",
+      "Food & beverage",
+      "Consumer electronics",
+      "Home & décor",
+      "Beauty & personal care"
+    ],
+    "state": [
+      "Karnataka",
+      "Maharashtra",
+      "Tamil Nadu",
+      "Telangana",
+      "Delhi",
+      "Kerala",
+      "Gujarat",
+      "West Bengal"
+    ]
+  },
+  "notifPrefs": {
+    "Domain expiration": [30, 7, 1],
+    "SSL expiration": [30, 14, 7],
+    "Hosting renewals": [14, 7],
+    "Subscription renewals": [14, 7],
+    "Invoice due dates": [7, 1],
+    "Overdue payments": [1, 7, 14],
+    "Upcoming maintenance": [2, 1]
+  },
+  "clients": [
+    {
+      "id": "kaveri",
+      "name": "Kaveri Naturals",
+      "color": "#0F7B5F",
+      "type": "D2C brand",
+      "industry": "Food & wellness",
+      "website": "https://kaverinaturals.in",
+      "since": "2023-03-14",
+      "desc": "Organic staples, cold-pressed oils and wellness products sold through a headless storefront and a mobile app; ~18k orders a month.",
+      "contact": "Ananya Rao",
+      "contactRole": "Founder & CEO",
+      "email": "ananya@kaverinaturals.example",
+      "phone": "+91 98450 12345",
+      "alt": "",
+      "addr1": "2nd Floor, 14 Lavelle Road",
+      "addr2": "",
+      "city": "Bengaluru",
+      "state": "Karnataka",
+      "zip": "560001",
+      "gstin": "29AAKCK1234F1Z5",
+      "currency": "INR",
+      "terms": "Net 15",
+      "billing": "",
+      "notes": "Peak traffic during Diwali sale. Freeze production deploys 25 Oct – 3 Nov. Ananya approves all releases; Karan handles tech sign-off.",
+      "status": "Active",
+      "contacts": [
+        {
+          "name": "Ananya Rao",
+          "role": "Founder & CEO",
+          "email": "ananya@kaverinaturals.example",
+          "phone": "+91 98450 12345",
+          "tag": "Primary",
+          "notify": true
+        },
+        {
+          "name": "Karan Desai",
+          "role": "Head of Technology",
+          "email": "karan@kaverinaturals.example",
+          "phone": "+91 98861 22410",
+          "tag": "Technical",
+          "notify": true
+        },
+        {
+          "name": "Lakshmi Menon",
+          "role": "Finance Manager",
+          "email": "accounts@kaverinaturals.example",
+          "phone": "+91 80 4123 9900",
+          "tag": "Billing",
+          "notify": false
+        }
+      ]
+    },
+    {
+      "id": "urbanloom",
+      "name": "UrbanLoom Apparel",
+      "color": "#334155",
+      "type": "Marketplace seller",
+      "industry": "Fashion & apparel",
+      "website": "https://urbanloom.co",
+      "since": "2022-08-01",
+      "desc": "Handloom-inspired contemporary apparel. Shopify Plus storefront with custom apps for size guides, returns and marketplace sync.",
+      "contact": "Rohan Mehta",
+      "contactRole": "Co-founder",
+      "email": "rohan@urbanloom.example",
+      "phone": "+91 98200 44567",
+      "alt": "+91 22 4012 8890",
+      "addr1": "4th Floor, Kamala Mills Compound",
+      "addr2": "Lower Parel",
+      "city": "Mumbai",
+      "state": "Maharashtra",
+      "zip": "400013",
+      "gstin": "27AABCU5678K1Z2",
+      "currency": "INR",
+      "terms": "Net 15",
+      "billing": "",
+      "notes": "Prefers releases on Tuesday mornings. Send invoices to accounts@urbanloom.example with Rohan in CC.",
+      "status": "Active",
+      "contacts": [
+        {
+          "name": "Rohan Mehta",
+          "role": "Co-founder",
+          "email": "rohan@urbanloom.example",
+          "phone": "+91 98200 44567",
+          "tag": "Primary",
+          "notify": true
+        },
+        {
+          "name": "Sneha Kulkarni",
+          "role": "E-commerce Manager",
+          "email": "sneha@urbanloom.example",
+          "phone": "+91 98670 11902",
+          "tag": "Technical",
+          "notify": true
+        },
+        {
+          "name": "Accounts team",
+          "role": "Finance",
+          "email": "accounts@urbanloom.example",
+          "phone": "+91 22 4012 8890",
+          "tag": "Billing",
+          "notify": false
+        }
+      ]
+    },
+    {
+      "id": "brewcraft",
+      "name": "BrewCraft Coffee Co.",
+      "color": "#8A4B24",
+      "type": "Subscription commerce",
+      "industry": "Food & beverage",
+      "website": "https://brewcraft.coffee",
+      "since": "2024-01-15",
+      "desc": "Specialty coffee roaster with a subscription-first storefront and a companion app for brew guides and re-orders.",
+      "contact": "Priya Nair",
+      "contactRole": "Director, Digital",
+      "email": "priya@brewcraft.example",
+      "phone": "+91 99400 78901",
+      "alt": "",
+      "addr1": "27 Khader Nawaz Khan Road",
+      "addr2": "Nungambakkam",
+      "city": "Chennai",
+      "state": "Tamil Nadu",
+      "zip": "600006",
+      "gstin": "33AAFCB9012L1Z8",
+      "currency": "INR",
+      "terms": "Net 30",
+      "billing": "",
+      "notes": "Route payment reminders to finance@brewcraft.example.",
+      "status": "Active",
+      "contacts": [
+        {
+          "name": "Priya Nair",
+          "role": "Director, Digital",
+          "email": "priya@brewcraft.example",
+          "phone": "+91 99400 78901",
+          "tag": "Primary",
+          "notify": true
+        },
+        {
+          "name": "Finance desk",
+          "role": "Accounts payable",
+          "email": "finance@brewcraft.example",
+          "phone": "+91 44 4290 1100",
+          "tag": "Billing",
+          "notify": false
+        }
+      ]
+    },
+    {
+      "id": "voltix",
+      "name": "Voltix Electronics",
+      "color": "#2554C7",
+      "type": "Online retail",
+      "industry": "Consumer electronics",
+      "website": "https://voltix.store",
+      "since": "2025-06-02",
+      "desc": "Electronics and accessories retailer; we build their admin console and order-management integrations.",
+      "contact": "Arjun Shetty",
+      "contactRole": "COO",
+      "email": "arjun.shetty@voltix.example",
+      "phone": "+91 97390 23456",
+      "alt": "",
+      "addr1": "88 Outer Ring Road",
+      "addr2": "Marathahalli",
+      "city": "Bengaluru",
+      "state": "Karnataka",
+      "zip": "560037",
+      "gstin": "29AAHCV3456M1Z1",
+      "currency": "INR",
+      "terms": "Net 30",
+      "billing": "",
+      "notes": "Admin Console v1.4.0 scheduled for QA on 10 Oct.",
+      "status": "Active",
+      "contacts": [
+        {
+          "name": "Arjun Shetty",
+          "role": "COO",
+          "email": "arjun.shetty@voltix.example",
+          "phone": "+91 97390 23456",
+          "tag": "Primary",
+          "notify": true
+        }
+      ]
+    },
+    {
+      "id": "saffron",
+      "name": "Saffron Street Foods",
+      "color": "#B4470F",
+      "type": "Cloud kitchen",
+      "industry": "Food & beverage",
+      "website": "https://saffronstreet.in",
+      "since": "2026-02-20",
+      "desc": "Multi-brand cloud kitchen; we sync their POS with aggregator menus.",
+      "contact": "Imran Qureshi",
+      "contactRole": "Founder",
+      "email": "imran@saffronstreet.example",
+      "phone": "+91 98860 67890",
+      "alt": "",
+      "addr1": "Plot 12, Road No. 36",
+      "addr2": "Jubilee Hills",
+      "city": "Hyderabad",
+      "state": "Telangana",
+      "zip": "500033",
+      "gstin": "36AAPCS7890N1Z4",
+      "currency": "INR",
+      "terms": "Net 15",
+      "billing": "",
+      "notes": "Staging deploy of POS Sync v0.9.2 failed on 30 Sep — awaiting new aggregator sandbox keys.",
+      "status": "Active",
+      "contacts": [
+        {
+          "name": "Imran Qureshi",
+          "role": "Founder",
+          "email": "imran@saffronstreet.example",
+          "phone": "+91 98860 67890",
+          "tag": "Primary",
+          "notify": true
+        }
+      ]
+    },
+    {
+      "id": "petal",
+      "name": "Petal & Pine Home",
+      "color": "#9D3F67",
+      "type": "D2C brand",
+      "industry": "Home & décor",
+      "website": "https://petalandpine.com",
+      "since": "2021-11-08",
+      "desc": "Former client; storefront handed over to their in-house team in May 2026.",
+      "contact": "Meera Iyer",
+      "contactRole": "Founder",
+      "email": "meera@petalandpine.example",
+      "phone": "+91 90080 11223",
+      "alt": "",
+      "addr1": "Lane 5, Koregaon Park",
+      "addr2": "",
+      "city": "Pune",
+      "state": "Maharashtra",
+      "zip": "411001",
+      "gstin": "27AAKFP2345P1Z9",
+      "currency": "INR",
+      "terms": "Net 15",
+      "billing": "",
+      "notes": "Inactive since handover. Keep records for 7 years.",
+      "status": "Inactive",
+      "contacts": [
+        {
+          "name": "Meera Iyer",
+          "role": "Founder",
+          "email": "meera@petalandpine.example",
+          "phone": "+91 90080 11223",
+          "tag": "Primary",
+          "notify": false
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": "p1",
+      "name": "Kaveri Storefront",
+      "client": "kaveri",
+      "type": "E-commerce storefront",
+      "stack": "Next.js 14 · Medusa · PostgreSQL · Vercel",
+      "status": "Active",
+      "start": "2024-03-12",
+      "team": ["SK", "FA", "NJ"],
+      "url": "https://kaverinaturals.in",
+      "envs": ["DEV", "QA", "STG", "PROD"],
+      "repo": "github.com/dsolutions/kaveri-storefront",
+      "sheet": {
+        "extraKeys": [
+          {
+            "label": "Algolia app ID",
+            "value": "DEMOALGOLIA",
+            "secret": false
+          },
+          {
+            "label": "Algolia admin key",
+            "value": "demo-placeholder-not-a-real-secret",
+            "secret": true
+          }
+        ],
+        "costs": [
+          {
+            "name": "AWS RDS (db.t4g.medium)",
+            "amount": "9800",
+            "cycle": "Monthly",
+            "nextDue": "2026-11-01"
+          },
+          {
+            "name": "Cloudflare Pro",
+            "amount": "1700",
+            "cycle": "Monthly",
+            "nextDue": "2026-10-28"
+          },
+          {
+            "name": "kaveri.shop (second domain, Namecheap)",
+            "amount": "1950",
+            "cycle": "Yearly",
+            "nextDue": "2027-06-09"
+          }
+        ],
+        "notes": "Freeze production deploys 25 Oct – 3 Nov (Diwali sale). Karan approves DB migrations.",
+        "links": {
+          "prod": "https://kaverinaturals.in",
+          "staging": "https://staging.kaverinaturals.in",
+          "dev": "https://dev.kaverinaturals.in",
+          "admin": "https://admin.kaverinaturals.in",
+          "api": "https://api.kaverinaturals.in",
+          "apiStaging": "https://api.staging.kaverinaturals.in",
+          "repo": "github.com/dsolutions/kaveri-storefront"
+        },
+        "social": {
+          "instagram": "https://instagram.com/kaverinaturals",
+          "facebook": "https://facebook.com/kaverinaturals",
+          "youtube": "https://youtube.com/@kaverinaturals",
+          "other": ""
+        },
+        "domain": {
+          "name": "kaverinaturals.in",
+          "registrar": "GoDaddy",
+          "account": "domains@kaverinaturals.example",
+          "password": "demo-placeholder-not-a-real-secret",
+          "purchased": "2021-10-22",
+          "expiry": "2026-10-22",
+          "cost": "799",
+          "renewal": "899",
+          "auto": "Off",
+          "dns": "Cloudflare",
+          "sslProvider": "Sectigo wildcard (*.kaverinaturals.in)",
+          "sslExpiry": "2026-10-22",
+          "sslCost": "8900"
+        },
+        "hosting": {
+          "platform": "Vercel",
+          "plan": "Pro · 3 seats",
+          "region": "bom1 · Mumbai",
+          "ip": "Managed (edge)",
+          "account": "devops@dsolutions.example",
+          "password": "demo-placeholder-not-a-real-secret",
+          "cost": "5040",
+          "cycle": "Monthly",
+          "nextBill": "2026-11-14"
+        },
+        "db": {
+          "engine": "PostgreSQL",
+          "host": "kv-pg-prod.c9x2.ap-south-1.rds.amazonaws.com",
+          "port": "5432",
+          "name": "kaveri_store",
+          "user": "kaveri_app",
+          "password": "demo-placeholder-not-a-real-secret",
+          "conn": "demo-placeholder-not-a-real-secret",
+          "console": "https://console.aws.amazon.com/rds",
+          "backup": "Automated daily at 02:00 IST, 7-day retention"
+        },
+        "keys": {
+          "googleClientId": "demo-kaveri.apps.googleusercontent.com",
+          "googleSecret": "demo-placeholder-not-a-real-secret",
+          "payGateway": "Razorpay",
+          "payKeyId": "rzp_live_DEMOKEYID",
+          "paySecret": "demo-placeholder-not-a-real-secret",
+          "webhookSecret": "demo-placeholder-not-a-real-secret",
+          "shipping": "Shiprocket",
+          "shippingKey": "demo-placeholder-not-a-real-secret",
+          "ga4": "G-DEMO12345",
+          "pixel": "000000000000000",
+          "smsKey": "demo-placeholder-not-a-real-secret"
+        }
+      }
+    },
+    {
+      "id": "p2",
+      "name": "Kaveri Commerce API",
+      "client": "kaveri",
+      "type": "API / integration",
+      "stack": "NestJS · Redis · AWS ECS",
+      "status": "Active",
+      "start": "2024-06-03",
+      "team": ["FA", "SK"],
+      "url": "https://api.kaverinaturals.in",
+      "envs": ["DEV", "STG", "PROD"],
+      "repo": "github.com/dsolutions/kaveri-api",
+      "sheet": {
+        "extraKeys": [],
+        "costs": [],
+        "notes": "Shares the Razorpay account with the storefront.",
+        "links": {
+          "prod": "https://api.kaverinaturals.in",
+          "staging": "https://api.staging.kaverinaturals.in",
+          "dev": "",
+          "admin": "",
+          "api": "https://api.kaverinaturals.in",
+          "apiStaging": "https://api.staging.kaverinaturals.in",
+          "repo": "github.com/dsolutions/kaveri-api"
+        },
+        "social": {
+          "instagram": "",
+          "facebook": "",
+          "youtube": "",
+          "other": ""
+        },
+        "domain": {
+          "name": "",
+          "registrar": "",
+          "account": "",
+          "password": "",
+          "purchased": "",
+          "expiry": "",
+          "cost": "",
+          "renewal": "",
+          "auto": "",
+          "dns": "Cloudflare (subdomain of kaverinaturals.in)",
+          "sslProvider": "",
+          "sslExpiry": "",
+          "sslCost": ""
+        },
+        "hosting": {
+          "platform": "AWS",
+          "plan": "ECS Fargate · 2 vCPU / 4 GB × 3",
+          "region": "ap-south-1 · Mumbai",
+          "ip": "13.233.48.112",
+          "account": "aws-root@dsolutions.example",
+          "password": "demo-placeholder-not-a-real-secret",
+          "cost": "38400",
+          "cycle": "Monthly",
+          "nextBill": "2026-11-01"
+        },
+        "db": {
+          "engine": "Redis",
+          "host": "kv-redis.x1ab.aps1.cache.amazonaws.com",
+          "port": "6379",
+          "name": "cache-0",
+          "user": "default",
+          "password": "demo-placeholder-not-a-real-secret",
+          "conn": "",
+          "console": "https://console.aws.amazon.com/elasticache",
+          "backup": "Snapshot every 6 hours"
+        },
+        "keys": {
+          "googleClientId": "",
+          "googleSecret": "",
+          "payGateway": "Razorpay",
+          "payKeyId": "rzp_live_DEMOKEYID",
+          "paySecret": "demo-placeholder-not-a-real-secret",
+          "webhookSecret": "demo-placeholder-not-a-real-secret",
+          "shipping": "Shiprocket",
+          "shippingKey": "demo-placeholder-not-a-real-secret",
+          "ga4": "",
+          "pixel": "",
+          "smsKey": ""
+        }
+      }
+    },
+    {
+      "id": "p3",
+      "name": "Kaveri Mobile App",
+      "client": "kaveri",
+      "type": "Mobile app",
+      "stack": "React Native · Expo · Firebase",
+      "status": "Maintenance",
+      "start": "2025-01-18",
+      "team": ["NJ"],
+      "url": "https://kaverinaturals.in/app",
+      "envs": ["QA", "PROD"],
+      "repo": "github.com/dsolutions/kaveri-mobile",
+      "sheet": {
+        "extraKeys": [
+          {
+            "label": "Firebase server key (push)",
+            "value": "demo-placeholder-not-a-real-secret",
+            "secret": true
+          }
+        ],
+        "costs": [
+          {
+            "name": "Apple Developer Program",
+            "amount": "8700",
+            "cycle": "Yearly",
+            "nextDue": "2027-01-18"
+          },
+          {
+            "name": "Google Play Console",
+            "amount": "2100",
+            "cycle": "Yearly",
+            "nextDue": "2027-01-18"
+          }
+        ],
+        "notes": "",
+        "links": {
+          "prod": "https://kaverinaturals.in/app",
+          "staging": "",
+          "dev": "",
+          "admin": "https://console.firebase.google.com",
+          "api": "",
+          "apiStaging": "",
+          "repo": "github.com/dsolutions/kaveri-mobile"
+        },
+        "social": {
+          "instagram": "",
+          "facebook": "",
+          "youtube": "",
+          "other": ""
+        },
+        "domain": {
+          "name": "",
+          "registrar": "",
+          "account": "",
+          "password": "",
+          "purchased": "",
+          "expiry": "",
+          "cost": "",
+          "renewal": "",
+          "auto": "",
+          "dns": "",
+          "sslProvider": "",
+          "sslExpiry": "",
+          "sslCost": ""
+        },
+        "hosting": {
+          "platform": "Other",
+          "plan": "Firebase Blaze + Expo EAS",
+          "region": "asia-south1",
+          "ip": "",
+          "account": "devops@dsolutions.example",
+          "password": "demo-placeholder-not-a-real-secret",
+          "cost": "2400",
+          "cycle": "Monthly",
+          "nextBill": "2026-11-05"
+        },
+        "db": {
+          "engine": "Firebase Firestore",
+          "host": "kaveri-mobile.firebaseio.com",
+          "port": "",
+          "name": "(default)",
+          "user": "",
+          "password": "",
+          "conn": "",
+          "console": "https://console.firebase.google.com",
+          "backup": "Weekly export to Cloud Storage"
+        },
+        "keys": {
+          "googleClientId": "demo-kaveri-mobile.apps.googleusercontent.com",
+          "googleSecret": "demo-placeholder-not-a-real-secret",
+          "payGateway": "Razorpay",
+          "payKeyId": "rzp_live_DEMOKEYID",
+          "paySecret": "demo-placeholder-not-a-real-secret",
+          "webhookSecret": "",
+          "shipping": "",
+          "shippingKey": "",
+          "ga4": "",
+          "pixel": "",
+          "smsKey": ""
+        }
+      }
+    },
+    {
+      "id": "p4",
+      "name": "UrbanLoom Storefront",
+      "client": "urbanloom",
+      "type": "E-commerce storefront",
+      "stack": "Shopify Plus · Hydrogen · Remix",
+      "status": "Active",
+      "start": "2022-09-04",
+      "team": ["SK", "NJ"],
+      "url": "https://urbanloom.co",
+      "envs": ["DEV", "STG", "PROD"],
+      "repo": "github.com/dsolutions/urbanloom-hydrogen",
+      "sheet": {
+        "extraKeys": [
+          {
+            "label": "Shopify Storefront API token",
+            "value": "demo-placeholder-not-a-real-secret",
+            "secret": true
+          }
+        ],
+        "costs": [
+          {
+            "name": "Google Workspace (12 seats)",
+            "amount": "19872",
+            "cycle": "Yearly",
+            "nextDue": "2026-11-18"
+          },
+          {
+            "name": "urbanloom.in (redirect domain, GoDaddy)",
+            "amount": "899",
+            "cycle": "Yearly",
+            "nextDue": "2027-10-14"
+          }
+        ],
+        "notes": "Release only on Tuesday mornings. Shopify admin access via the client’s staff account.",
+        "links": {
+          "prod": "https://urbanloom.co",
+          "staging": "https://staging.urbanloom.co",
+          "dev": "",
+          "admin": "https://admin.shopify.com/store/urbanloom",
+          "api": "https://sync.urbanloom.co",
+          "apiStaging": "",
+          "repo": "github.com/dsolutions/urbanloom-hydrogen"
+        },
+        "social": {
+          "instagram": "https://instagram.com/urbanloom.co",
+          "facebook": "https://facebook.com/urbanloomapparel",
+          "youtube": "",
+          "other": ""
+        },
+        "domain": {
+          "name": "urbanloom.co",
+          "registrar": "GoDaddy",
+          "account": "rohan@urbanloom.example",
+          "password": "demo-placeholder-not-a-real-secret",
+          "purchased": "2019-10-14",
+          "expiry": "2026-10-14",
+          "cost": "1199",
+          "renewal": "1299",
+          "auto": "Off",
+          "dns": "GoDaddy",
+          "sslProvider": "Shopify managed (free)",
+          "sslExpiry": "",
+          "sslCost": ""
+        },
+        "hosting": {
+          "platform": "Shopify",
+          "plan": "Shopify Plus + Oxygen",
+          "region": "Global",
+          "ip": "Managed",
+          "account": "rohan@urbanloom.example",
+          "password": "demo-placeholder-not-a-real-secret",
+          "cost": "189000",
+          "cycle": "Monthly",
+          "nextBill": "2026-11-01"
+        },
+        "db": {
+          "engine": "Other",
+          "host": "Shopify (managed)",
+          "port": "",
+          "name": "Shopify store data",
+          "user": "",
+          "password": "",
+          "conn": "",
+          "console": "https://admin.shopify.com/store/urbanloom",
+          "backup": ""
+        },
+        "keys": {
+          "googleClientId": "demo-urbanloom.apps.googleusercontent.com",
+          "googleSecret": "demo-placeholder-not-a-real-secret",
+          "payGateway": "Shopify Payments",
+          "payKeyId": "shopify-payments",
+          "paySecret": "",
+          "webhookSecret": "",
+          "shipping": "Delhivery",
+          "shippingKey": "demo-placeholder-not-a-real-secret",
+          "ga4": "G-DEMO67890",
+          "pixel": "111111111111111",
+          "smsKey": ""
+        }
+      }
+    },
+    {
+      "id": "p5",
+      "name": "Marketplace Sync",
+      "client": "urbanloom",
+      "type": "API / integration",
+      "stack": "FastAPI · Celery · GCP Cloud Run",
+      "status": "Active",
+      "start": "2025-02-10",
+      "team": ["FA"],
+      "url": "https://sync.urbanloom.co",
+      "envs": ["DEV", "PROD"],
+      "repo": "github.com/dsolutions/urbanloom-sync",
+      "sheet": {
+        "extraKeys": [
+          {
+            "label": "Amazon SP-API refresh token",
+            "value": "demo-placeholder-not-a-real-secret",
+            "secret": true
+          },
+          {
+            "label": "Myntra partner ID",
+            "value": "MYN-DEMO-001",
+            "secret": false
+          }
+        ],
+        "costs": [],
+        "notes": "",
+        "links": {
+          "prod": "https://sync.urbanloom.co",
+          "staging": "",
+          "dev": "",
+          "admin": "",
+          "api": "https://sync.urbanloom.co",
+          "apiStaging": "",
+          "repo": "github.com/dsolutions/urbanloom-sync"
+        },
+        "social": {
+          "instagram": "",
+          "facebook": "",
+          "youtube": "",
+          "other": ""
+        },
+        "domain": {
+          "name": "",
+          "registrar": "",
+          "account": "",
+          "password": "",
+          "purchased": "",
+          "expiry": "",
+          "cost": "",
+          "renewal": "",
+          "auto": "",
+          "dns": "",
+          "sslProvider": "",
+          "sslExpiry": "",
+          "sslCost": ""
+        },
+        "hosting": {
+          "platform": "Google Cloud",
+          "plan": "Cloud Run · autoscale 1–10",
+          "region": "asia-south1 · Mumbai",
+          "ip": "34.93.120.41",
+          "account": "gcp@dsolutions.example",
+          "password": "demo-placeholder-not-a-real-secret",
+          "cost": "6200",
+          "cycle": "Monthly",
+          "nextBill": "2026-11-01"
+        },
+        "db": {
+          "engine": "MySQL",
+          "host": "10.24.0.7 (Cloud SQL, private)",
+          "port": "3306",
+          "name": "ul_sync",
+          "user": "sync_app",
+          "password": "demo-placeholder-not-a-real-secret",
+          "conn": "demo-placeholder-not-a-real-secret",
+          "console": "https://console.cloud.google.com/sql",
+          "backup": "Daily at 01:30 IST"
+        },
+        "keys": {
+          "googleClientId": "",
+          "googleSecret": "",
+          "payGateway": "",
+          "payKeyId": "",
+          "paySecret": "",
+          "webhookSecret": "",
+          "shipping": "",
+          "shippingKey": "",
+          "ga4": "",
+          "pixel": "",
+          "smsKey": ""
+        }
+      }
+    },
+    {
+      "id": "p6",
+      "name": "BrewCraft Subscription App",
+      "client": "brewcraft",
+      "type": "Mobile app",
+      "stack": "Flutter · Supabase · Stripe Billing",
+      "status": "Active",
+      "start": "2024-01-15",
+      "team": ["NJ", "SK"],
+      "url": "https://app.brewcraft.coffee",
+      "envs": ["DEV", "QA", "PROD"],
+      "repo": "github.com/dsolutions/brewcraft-app",
+      "sheet": {
+        "extraKeys": [
+          {
+            "label": "Firebase server key (push)",
+            "value": "demo-placeholder-not-a-real-secret",
+            "secret": true
+          }
+        ],
+        "costs": [
+          {
+            "name": "Apple Developer Program",
+            "amount": "8700",
+            "cycle": "Yearly",
+            "nextDue": "2027-01-15"
+          },
+          {
+            "name": "Google Play Console",
+            "amount": "2100",
+            "cycle": "Yearly",
+            "nextDue": "2027-01-15"
+          }
+        ],
+        "notes": "Stripe is in test mode on staging. Subscriptions renew on the 1st of each month.",
+        "links": {
+          "prod": "https://app.brewcraft.coffee",
+          "staging": "https://staging-app.brewcraft.coffee",
+          "dev": "",
+          "admin": "https://admin.brewcraft.coffee",
+          "api": "https://api.brewcraft.coffee",
+          "apiStaging": "https://api-staging.brewcraft.coffee",
+          "repo": "github.com/dsolutions/brewcraft-app"
+        },
+        "social": {
+          "instagram": "https://instagram.com/brewcraft.coffee",
+          "facebook": "",
+          "youtube": "https://youtube.com/@brewcraftcoffee",
+          "other": ""
+        },
+        "domain": {
+          "name": "",
+          "registrar": "",
+          "account": "",
+          "password": "",
+          "purchased": "",
+          "expiry": "",
+          "cost": "",
+          "renewal": "",
+          "auto": "",
+          "dns": "",
+          "sslProvider": "",
+          "sslExpiry": "",
+          "sslCost": ""
+        },
+        "hosting": {
+          "platform": "Supabase",
+          "plan": "Supabase Pro + Netlify",
+          "region": "ap-south-1",
+          "ip": "Managed",
+          "account": "devops@dsolutions.example",
+          "password": "demo-placeholder-not-a-real-secret",
+          "cost": "2100",
+          "cycle": "Monthly",
+          "nextBill": "2026-10-20"
+        },
+        "db": {
+          "engine": "Supabase (Postgres)",
+          "host": "db.brewcraft-app.supabase.co",
+          "port": "5432",
+          "name": "postgres",
+          "user": "postgres",
+          "password": "demo-placeholder-not-a-real-secret",
+          "conn": "demo-placeholder-not-a-real-secret",
+          "console": "https://supabase.com/dashboard",
+          "backup": "Point-in-time recovery, 7 days"
+        },
+        "keys": {
+          "googleClientId": "demo-brewcraft.apps.googleusercontent.com",
+          "googleSecret": "demo-placeholder-not-a-real-secret",
+          "payGateway": "Stripe",
+          "payKeyId": "pk_live_DEMOBREWCRAFT",
+          "paySecret": "demo-placeholder-not-a-real-secret",
+          "webhookSecret": "demo-placeholder-not-a-real-secret",
+          "shipping": "Shiprocket",
+          "shippingKey": "demo-placeholder-not-a-real-secret",
+          "ga4": "G-DEMOBREW1",
+          "pixel": "",
+          "smsKey": "demo-placeholder-not-a-real-secret"
+        }
+      }
+    },
+    {
+      "id": "p7",
+      "name": "BrewCraft Storefront",
+      "client": "brewcraft",
+      "type": "E-commerce storefront",
+      "stack": "WooCommerce · PHP 8.2 · AWS Lightsail",
+      "status": "Active",
+      "start": "2024-01-15",
+      "team": ["FA"],
+      "url": "https://brewcraft.coffee",
+      "envs": ["STG", "PROD"],
+      "repo": "github.com/dsolutions/brewcraft-woo",
+      "sheet": {
+        "extraKeys": [
+          {
+            "label": "Lightsail SSH key",
+            "value": "demo-placeholder-not-a-real-secret",
+            "secret": true
+          },
+          {
+            "label": "Mailchimp API key",
+            "value": "demo-placeholder-not-a-real-secret",
+            "secret": true
+          }
+        ],
+        "costs": [],
+        "notes": "",
+        "links": {
+          "prod": "https://brewcraft.coffee",
+          "staging": "https://staging.brewcraft.coffee",
+          "dev": "",
+          "admin": "https://brewcraft.coffee/wp-admin",
+          "api": "",
+          "apiStaging": "",
+          "repo": "github.com/dsolutions/brewcraft-woo"
+        },
+        "social": {
+          "instagram": "https://instagram.com/brewcraft.coffee",
+          "facebook": "",
+          "youtube": "https://youtube.com/@brewcraftcoffee",
+          "other": ""
+        },
+        "domain": {
+          "name": "brewcraft.coffee",
+          "registrar": "Cloudflare",
+          "account": "priya@brewcraft.example",
+          "password": "demo-placeholder-not-a-real-secret",
+          "purchased": "2024-03-03",
+          "expiry": "2027-03-03",
+          "cost": "2650",
+          "renewal": "2650",
+          "auto": "On",
+          "dns": "Cloudflare",
+          "sslProvider": "Cloudflare Universal SSL (free)",
+          "sslExpiry": "",
+          "sslCost": ""
+        },
+        "hosting": {
+          "platform": "AWS",
+          "plan": "Lightsail 2 GB · Reserved Instance",
+          "region": "ap-south-1 · Mumbai",
+          "ip": "65.0.112.86",
+          "account": "aws-root@dsolutions.example",
+          "password": "demo-placeholder-not-a-real-secret",
+          "cost": "54000",
+          "cycle": "Yearly",
+          "nextBill": "2026-11-02"
+        },
+        "db": {
+          "engine": "MySQL",
+          "host": "localhost (bc-woo-prod)",
+          "port": "3306",
+          "name": "bc_woo",
+          "user": "wp_user",
+          "password": "demo-placeholder-not-a-real-secret",
+          "conn": "",
+          "console": "https://brewcraft.coffee/phpmyadmin",
+          "backup": "Nightly via UpdraftPlus — last backup 26 h ago"
+        },
+        "keys": {
+          "googleClientId": "",
+          "googleSecret": "",
+          "payGateway": "Stripe",
+          "payKeyId": "pk_live_DEMOBREWCRAFT",
+          "paySecret": "demo-placeholder-not-a-real-secret",
+          "webhookSecret": "demo-placeholder-not-a-real-secret",
+          "shipping": "Shiprocket",
+          "shippingKey": "demo-placeholder-not-a-real-secret",
+          "ga4": "G-DEMOBREW1",
+          "pixel": "",
+          "smsKey": ""
+        }
+      }
+    },
+    {
+      "id": "p8",
+      "name": "Voltix Admin Console",
+      "client": "voltix",
+      "type": "Admin / back-office",
+      "stack": "React · TypeScript · Laravel 11 · MySQL",
+      "status": "Active",
+      "start": "2025-06-02",
+      "team": ["SK", "FA"],
+      "url": "https://admin.voltix.store",
+      "envs": ["DEV", "QA", "PROD"],
+      "repo": "github.com/dsolutions/voltix-admin",
+      "sheet": {
+        "extraKeys": [
+          {
+            "label": "Unicommerce API key",
+            "value": "demo-placeholder-not-a-real-secret",
+            "secret": true
+          },
+          {
+            "label": "DigitalOcean API token",
+            "value": "demo-placeholder-not-a-real-secret",
+            "secret": true
+          }
+        ],
+        "costs": [],
+        "notes": "",
+        "links": {
+          "prod": "https://admin.voltix.store",
+          "staging": "https://qa-admin.voltix.store",
+          "dev": "",
+          "admin": "https://admin.voltix.store",
+          "api": "https://admin.voltix.store/api",
+          "apiStaging": "",
+          "repo": "github.com/dsolutions/voltix-admin"
+        },
+        "social": {
+          "instagram": "https://instagram.com/voltix.store",
+          "facebook": "",
+          "youtube": "https://youtube.com/@voltixstore",
+          "other": ""
+        },
+        "domain": {
+          "name": "voltix.store",
+          "registrar": "Namecheap",
+          "account": "arjun.shetty@voltix.example",
+          "password": "demo-placeholder-not-a-real-secret",
+          "purchased": "2024-11-05",
+          "expiry": "2026-11-05",
+          "cost": "2450",
+          "renewal": "2450",
+          "auto": "On",
+          "dns": "Namecheap",
+          "sslProvider": "Let's Encrypt (auto)",
+          "sslExpiry": "2026-12-18",
+          "sslCost": "0"
+        },
+        "hosting": {
+          "platform": "DigitalOcean",
+          "plan": "Droplet 4 vCPU / 8 GB + Managed MySQL",
+          "region": "BLR1 · Bengaluru",
+          "ip": "139.59.21.204",
+          "account": "do@dsolutions.example",
+          "password": "demo-placeholder-not-a-real-secret",
+          "cost": "7800",
+          "cycle": "Monthly",
+          "nextBill": "2026-11-01"
+        },
+        "db": {
+          "engine": "MySQL",
+          "host": "vx-db-prod-do-user.db.ondigitalocean.com",
+          "port": "25060",
+          "name": "voltix_admin",
+          "user": "doadmin",
+          "password": "demo-placeholder-not-a-real-secret",
+          "conn": "demo-placeholder-not-a-real-secret",
+          "console": "https://cloud.digitalocean.com/databases",
+          "backup": "Daily — last run failed (storage quota)"
+        },
+        "keys": {
+          "googleClientId": "",
+          "googleSecret": "",
+          "payGateway": "Razorpay",
+          "payKeyId": "rzp_live_DEMOVOLTIX",
+          "paySecret": "demo-placeholder-not-a-real-secret",
+          "webhookSecret": "demo-placeholder-not-a-real-secret",
+          "shipping": "",
+          "shippingKey": "",
+          "ga4": "",
+          "pixel": "",
+          "smsKey": ""
+        }
+      }
+    },
+    {
+      "id": "p9",
+      "name": "POS Sync Service",
+      "client": "saffron",
+      "type": "API / integration",
+      "stack": "Go · PostgreSQL · Railway",
+      "status": "Active",
+      "start": "2026-02-20",
+      "team": ["FA"],
+      "url": "https://pos.saffronstreet.in",
+      "envs": ["DEV", "STG"],
+      "repo": "github.com/dsolutions/saffron-pos-sync",
+      "sheet": {
+        "extraKeys": [
+          {
+            "label": "Swiggy partner API key (sandbox)",
+            "value": "demo-placeholder-not-a-real-secret",
+            "secret": true
+          },
+          {
+            "label": "Zomato partner ID",
+            "value": "pending onboarding",
+            "secret": false
+          }
+        ],
+        "costs": [],
+        "notes": "Staging deploy failed on 30 Sep — waiting for new Swiggy sandbox keys.",
+        "links": {
+          "prod": "https://pos.saffronstreet.in",
+          "staging": "https://pos-staging.saffronstreet.in",
+          "dev": "",
+          "admin": "",
+          "api": "https://pos.saffronstreet.in/v1",
+          "apiStaging": "",
+          "repo": "github.com/dsolutions/saffron-pos-sync"
+        },
+        "social": {
+          "instagram": "https://instagram.com/saffronstreetfoods",
+          "facebook": "",
+          "youtube": "",
+          "other": ""
+        },
+        "domain": {
+          "name": "saffronstreet.in",
+          "registrar": "GoDaddy",
+          "account": "imran@saffronstreet.example",
+          "password": "demo-placeholder-not-a-real-secret",
+          "purchased": "2026-01-19",
+          "expiry": "2027-01-19",
+          "cost": "799",
+          "renewal": "899",
+          "auto": "On",
+          "dns": "GoDaddy",
+          "sslProvider": "Let's Encrypt (auto)",
+          "sslExpiry": "2026-12-11",
+          "sslCost": "0"
+        },
+        "hosting": {
+          "platform": "Railway",
+          "plan": "Starter",
+          "region": "Asia (Singapore)",
+          "ip": "Managed",
+          "account": "devops@dsolutions.example",
+          "password": "demo-placeholder-not-a-real-secret",
+          "cost": "1600",
+          "cycle": "Monthly",
+          "nextBill": "2026-10-20"
+        },
+        "db": {
+          "engine": "PostgreSQL",
+          "host": "containers-asia.railway.app",
+          "port": "6543",
+          "name": "pos_sync",
+          "user": "postgres",
+          "password": "demo-placeholder-not-a-real-secret",
+          "conn": "demo-placeholder-not-a-real-secret",
+          "console": "https://railway.app/dashboard",
+          "backup": "Daily at 00:15"
+        },
+        "keys": {
+          "googleClientId": "",
+          "googleSecret": "",
+          "payGateway": "",
+          "payKeyId": "",
+          "paySecret": "",
+          "webhookSecret": "",
+          "shipping": "",
+          "shippingKey": "",
+          "ga4": "",
+          "pixel": "",
+          "smsKey": ""
+        }
+      }
+    },
+    {
+      "id": "p10",
+      "name": "BrewCraft Subscription App v2",
+      "client": "brewcraft",
+      "type": "Mobile app",
+      "stack": "Flutter · Supabase",
+      "status": "Planning",
+      "start": "2026-10-12",
+      "team": ["DR", "NJ"],
+      "url": "https://app.brewcraft.coffee",
+      "envs": ["DEV"],
+      "repo": "github.com/dsolutions/brewcraft-app-v2",
+      "sheet": {
+        "extraKeys": [],
+        "costs": [],
+        "notes": "v2 planning — will reuse the Supabase project of the current app.",
+        "links": {
+          "prod": "https://app.brewcraft.coffee",
+          "staging": "",
+          "dev": "",
+          "admin": "",
+          "api": "",
+          "apiStaging": "",
+          "repo": "github.com/dsolutions/brewcraft-app-v2"
+        },
+        "social": {
+          "instagram": "",
+          "facebook": "",
+          "youtube": "",
+          "other": ""
+        },
+        "domain": {
+          "name": "",
+          "registrar": "",
+          "account": "",
+          "password": "",
+          "purchased": "",
+          "expiry": "",
+          "cost": "",
+          "renewal": "",
+          "auto": "",
+          "dns": "",
+          "sslProvider": "",
+          "sslExpiry": "",
+          "sslCost": ""
+        },
+        "hosting": {
+          "platform": "",
+          "plan": "",
+          "region": "",
+          "ip": "",
+          "account": "",
+          "password": "",
+          "cost": "",
+          "cycle": "",
+          "nextBill": ""
+        },
+        "db": {
+          "engine": "",
+          "host": "",
+          "port": "",
+          "name": "",
+          "user": "",
+          "password": "",
+          "conn": "",
+          "console": "",
+          "backup": ""
+        },
+        "keys": {
+          "googleClientId": "",
+          "googleSecret": "",
+          "payGateway": "",
+          "payKeyId": "",
+          "paySecret": "",
+          "webhookSecret": "",
+          "shipping": "",
+          "shippingKey": "",
+          "ga4": "",
+          "pixel": "",
+          "smsKey": ""
+        }
+      }
+    },
+    {
+      "id": "p11",
+      "name": "Petal & Pine Storefront",
+      "client": "petal",
+      "type": "E-commerce storefront",
+      "stack": "Shopify",
+      "status": "Completed",
+      "start": "2021-11-08",
+      "team": ["SK"],
+      "url": "https://petalandpine.com",
+      "envs": ["PROD"],
+      "repo": "github.com/dsolutions/petal-shopify",
+      "sheet": {
+        "extraKeys": [],
+        "costs": [],
+        "notes": "Handed over to the client’s in-house team in May 2026. Ask Meera whether to renew petalandpine.in.",
+        "links": {
+          "prod": "https://petalandpine.com",
+          "staging": "",
+          "dev": "",
+          "admin": "https://admin.shopify.com/store/petalandpine",
+          "api": "",
+          "apiStaging": "",
+          "repo": ""
+        },
+        "social": {
+          "instagram": "",
+          "facebook": "",
+          "youtube": "",
+          "other": ""
+        },
+        "domain": {
+          "name": "petalandpine.in",
+          "registrar": "GoDaddy",
+          "account": "meera@petalandpine.example",
+          "password": "",
+          "purchased": "2021-09-30",
+          "expiry": "2026-09-30",
+          "cost": "799",
+          "renewal": "899",
+          "auto": "Off",
+          "dns": "GoDaddy",
+          "sslProvider": "",
+          "sslExpiry": "",
+          "sslCost": ""
+        },
+        "hosting": {
+          "platform": "Shopify",
+          "plan": "Basic (client pays directly)",
+          "region": "Global",
+          "ip": "",
+          "account": "",
+          "password": "",
+          "cost": "",
+          "cycle": "",
+          "nextBill": ""
+        },
+        "db": {
+          "engine": "",
+          "host": "",
+          "port": "",
+          "name": "",
+          "user": "",
+          "password": "",
+          "conn": "",
+          "console": "",
+          "backup": ""
+        },
+        "keys": {
+          "googleClientId": "",
+          "googleSecret": "",
+          "payGateway": "",
+          "payKeyId": "",
+          "paySecret": "",
+          "webhookSecret": "",
+          "shipping": "",
+          "shippingKey": "",
+          "ga4": "",
+          "pixel": "",
+          "smsKey": ""
+        }
+      }
+    }
+  ],
+  "renewHistory": [
+    {
+      "date": "2026-10-06",
+      "name": "brewcraft.coffee SSL",
+      "client": "brewcraft",
+      "amount": 0,
+      "period": "90 days",
+      "by": "Cloudflare (auto)"
+    },
+    {
+      "date": "2026-09-18",
+      "name": "Shopify Plus",
+      "client": "urbanloom",
+      "amount": 189000,
+      "period": "1 month",
+      "by": "Auto-renew"
+    },
+    {
+      "date": "2026-01-19",
+      "name": "saffronstreet.in",
+      "client": "saffron",
+      "amount": 899,
+      "period": "1 year",
+      "by": "Vikram P."
+    },
+    {
+      "date": "2025-10-22",
+      "name": "*.kaverinaturals.in",
+      "client": "kaveri",
+      "amount": 8400,
+      "period": "1 year",
+      "by": "Karthi N."
+    },
+    {
+      "date": "2025-10-14",
+      "name": "urbanloom.co",
+      "client": "urbanloom",
+      "amount": 1199,
+      "period": "1 year",
+      "by": "Vikram P."
+    }
+  ],
+  "invoices": [
+    {
+      "no": "INV-2026-0148",
+      "client": "kaveri",
+      "project": "p1",
+      "date": "2026-10-08",
+      "due": "2026-10-23",
+      "status": "Draft",
+      "lines": [
+        {
+          "d": "October retainer — storefront development",
+          "q": 1,
+          "p": 75000
+        }
+      ],
+      "disc": 0,
+      "gst": 18
+    },
+    {
+      "no": "INV-2026-0147",
+      "client": "voltix",
+      "project": "p8",
+      "date": "2026-10-07",
+      "due": "2026-10-22",
+      "status": "Sent",
+      "lines": [
+        {
+          "d": "Admin Console — sprint 14 & 15",
+          "q": 2,
+          "p": 55000
+        },
+        {
+          "d": "Returns dashboard module",
+          "q": 1,
+          "p": 16000
+        }
+      ],
+      "disc": 0,
+      "gst": 18
+    },
+    {
+      "no": "INV-2026-0146",
+      "client": "saffron",
+      "project": "p9",
+      "date": "2026-10-08",
+      "due": "2026-10-25",
+      "status": "Sent",
+      "lines": [
+        {
+          "d": "POS Sync — September development",
+          "q": 1,
+          "p": 36000
+        }
+      ],
+      "disc": 0,
+      "gst": 18
+    },
+    {
+      "no": "INV-2026-0145",
+      "client": "urbanloom",
+      "project": "p4",
+      "date": "2026-09-30",
+      "due": "2026-10-15",
+      "status": "Sent",
+      "lines": [
+        {
+          "d": "Feature: Size-guide recommendations (v3.8.0)",
+          "q": 1,
+          "p": 42000,
+          "work": "w1"
+        },
+        {
+          "d": "Feature: Express checkout for repeat buyers (v3.8.0)",
+          "q": 1,
+          "p": 30000,
+          "work": "w2"
+        },
+        {
+          "d": "Monthly maintenance (Sep)",
+          "q": 1,
+          "p": 10000
+        }
+      ],
+      "disc": 0,
+      "gst": 18
+    },
+    {
+      "no": "INV-2026-0143",
+      "client": "kaveri",
+      "project": "p1",
+      "date": "2026-10-03",
+      "due": "2026-10-18",
+      "status": "Sent",
+      "lines": [
+        {
+          "d": "Feature: Festive collection landing pages (v4.2.0)",
+          "q": 1,
+          "p": 81000,
+          "work": "w4"
+        },
+        {
+          "d": "Performance optimisation",
+          "q": 1,
+          "p": 30035
+        }
+      ],
+      "disc": 0,
+      "gst": 18
+    },
+    {
+      "no": "INV-2026-0142",
+      "client": "kaveri",
+      "project": "p2",
+      "date": "2026-09-15",
+      "due": "2026-09-30",
+      "status": "Sent",
+      "lines": [
+        {
+          "d": "Change request: Refunds & webhooks API",
+          "q": 1,
+          "p": 101695,
+          "work": "w10"
+        }
+      ],
+      "disc": 0,
+      "gst": 18
+    },
+    {
+      "no": "INV-2026-0139",
+      "client": "brewcraft",
+      "project": "p6",
+      "date": "2026-08-31",
+      "due": "2026-09-30",
+      "status": "Sent",
+      "lines": [
+        {
+          "d": "Feature: Pause subscription from app (v1.9.0)",
+          "q": 1,
+          "p": 35000,
+          "work": "w7"
+        },
+        {
+          "d": "Feature: Brew timer widgets (v1.9.0)",
+          "q": 1,
+          "p": 22000,
+          "work": "w8"
+        }
+      ],
+      "disc": 0,
+      "gst": 18
+    },
+    {
+      "no": "INV-2026-0131",
+      "client": "urbanloom",
+      "project": "p5",
+      "date": "2026-08-29",
+      "due": "2026-09-13",
+      "status": "Sent",
+      "lines": [
+        {
+          "d": "Feature: Myntra connector",
+          "q": 1,
+          "p": 70000,
+          "work": "w15"
+        }
+      ],
+      "disc": 0,
+      "gst": 18
+    },
+    {
+      "no": "INV-2026-0128",
+      "client": "kaveri",
+      "project": "p3",
+      "date": "2026-08-12",
+      "due": "2026-08-27",
+      "status": "Sent",
+      "lines": [
+        {
+          "d": "Mobile app — reorder flow",
+          "q": 1,
+          "p": 60000
+        }
+      ],
+      "disc": 0,
+      "gst": 18
+    },
+    {
+      "no": "INV-2026-0122",
+      "client": "brewcraft",
+      "project": "p7",
+      "date": "2026-07-31",
+      "due": "2026-08-30",
+      "status": "Sent",
+      "lines": [
+        {
+          "d": "WooCommerce upgrade & hardening",
+          "q": 1,
+          "p": 50000
+        }
+      ],
+      "disc": 0,
+      "gst": 18
+    }
+  ],
+  "payments": [
+    {
+      "id": "RCPT-0091",
+      "date": "2026-10-08",
+      "invoice": "INV-2026-0142",
+      "method": "NEFT",
+      "ref": "HDFCN52026100812345",
+      "amount": 120000
+    },
+    {
+      "id": "RCPT-0090",
+      "date": "2026-10-06",
+      "invoice": "INV-2026-0145",
+      "method": "RTGS",
+      "ref": "ICICR42026100600917",
+      "amount": 50000
+    },
+    {
+      "id": "RCPT-0089",
+      "date": "2026-09-12",
+      "invoice": "INV-2026-0131",
+      "method": "NEFT",
+      "ref": "KKBKN52026091244120",
+      "amount": 82600
+    },
+    {
+      "id": "RCPT-0088",
+      "date": "2026-08-28",
+      "invoice": "INV-2026-0122",
+      "method": "NEFT",
+      "ref": "SBINN52026082811873",
+      "amount": 59000
+    },
+    {
+      "id": "RCPT-0087",
+      "date": "2026-08-25",
+      "invoice": "INV-2026-0128",
+      "method": "UPI",
+      "ref": "UPI/624511908812",
+      "amount": 70800
+    }
+  ],
+  "work": [
+    {
+      "id": "w1",
+      "client": "urbanloom",
+      "project": "p4",
+      "release": "r1",
+      "type": "Feature",
+      "title": "Size-guide recommendations",
+      "delivered": "2026-09-29",
+      "billing": "Fixed",
+      "amount": 42000,
+      "hours": 0,
+      "rate": 0,
+      "invoice": "INV-2026-0145"
+    },
+    {
+      "id": "w2",
+      "client": "urbanloom",
+      "project": "p4",
+      "release": "r1",
+      "type": "Feature",
+      "title": "Express checkout for repeat buyers",
+      "delivered": "2026-09-29",
+      "billing": "Fixed",
+      "amount": 30000,
+      "hours": 0,
+      "rate": 0,
+      "invoice": "INV-2026-0145"
+    },
+    {
+      "id": "w3",
+      "client": "urbanloom",
+      "project": "p4",
+      "release": "r1",
+      "type": "Bug fix",
+      "title": "Cart drawer flicker on iOS",
+      "delivered": "2026-10-08",
+      "billing": "Free",
+      "amount": 0,
+      "hours": 0,
+      "rate": 0,
+      "invoice": "",
+      "note": "Warranty — bug from v3.7"
+    },
+    {
+      "id": "w4",
+      "client": "kaveri",
+      "project": "p1",
+      "release": "r7",
+      "type": "Feature",
+      "title": "Festive collection landing pages",
+      "delivered": "2026-09-24",
+      "billing": "Fixed",
+      "amount": 81000,
+      "hours": 0,
+      "rate": 0,
+      "invoice": "INV-2026-0143"
+    },
+    {
+      "id": "w5",
+      "client": "kaveri",
+      "project": "p1",
+      "release": "r7",
+      "type": "Feature",
+      "title": "Wishlist sync across devices",
+      "delivered": "2026-09-24",
+      "billing": "Fixed",
+      "amount": 24000,
+      "hours": 0,
+      "rate": 0,
+      "invoice": ""
+    },
+    {
+      "id": "w6",
+      "client": "kaveri",
+      "project": "p1",
+      "release": "r7",
+      "type": "Bug fix",
+      "title": "PDP image zoom on Safari",
+      "delivered": "2026-09-24",
+      "billing": "Hourly",
+      "amount": 0,
+      "hours": 4,
+      "rate": 1500,
+      "invoice": ""
+    },
+    {
+      "id": "w7",
+      "client": "brewcraft",
+      "project": "p6",
+      "release": "",
+      "type": "Feature",
+      "title": "Pause subscription from app",
+      "delivered": "2026-08-28",
+      "billing": "Fixed",
+      "amount": 35000,
+      "hours": 0,
+      "rate": 0,
+      "invoice": "INV-2026-0139"
+    },
+    {
+      "id": "w8",
+      "client": "brewcraft",
+      "project": "p6",
+      "release": "",
+      "type": "Feature",
+      "title": "Brew timer widgets",
+      "delivered": "2026-08-28",
+      "billing": "Fixed",
+      "amount": 22000,
+      "hours": 0,
+      "rate": 0,
+      "invoice": "INV-2026-0139"
+    },
+    {
+      "id": "w9",
+      "client": "brewcraft",
+      "project": "p6",
+      "release": "r4",
+      "type": "Bug fix",
+      "title": "Stripe SCA retry loop",
+      "delivered": "2026-10-03",
+      "billing": "Hourly",
+      "amount": 0,
+      "hours": 6,
+      "rate": 1500,
+      "invoice": ""
+    },
+    {
+      "id": "w10",
+      "client": "kaveri",
+      "project": "p2",
+      "release": "",
+      "type": "Change request",
+      "title": "Refunds & webhooks API",
+      "delivered": "2026-09-10",
+      "billing": "Fixed",
+      "amount": 101695,
+      "hours": 0,
+      "rate": 0,
+      "invoice": "INV-2026-0142"
+    },
+    {
+      "id": "w11",
+      "client": "kaveri",
+      "project": "p2",
+      "release": "r2",
+      "type": "Feature",
+      "title": "Partial-refund webhook support",
+      "delivered": "2026-10-07",
+      "billing": "Fixed",
+      "amount": 18000,
+      "hours": 0,
+      "rate": 0,
+      "invoice": ""
+    },
+    {
+      "id": "w12",
+      "client": "kaveri",
+      "project": "p2",
+      "release": "r2",
+      "type": "Bug fix",
+      "title": "Duplicate COD order on retry",
+      "delivered": "2026-10-07",
+      "billing": "Hourly",
+      "amount": 0,
+      "hours": 3,
+      "rate": 1500,
+      "invoice": ""
+    },
+    {
+      "id": "w13",
+      "client": "kaveri",
+      "project": "p2",
+      "release": "r2",
+      "type": "Bug fix",
+      "title": "GST rounding on combo SKUs",
+      "delivered": "2026-10-07",
+      "billing": "Hourly",
+      "amount": 0,
+      "hours": 2,
+      "rate": 1500,
+      "invoice": ""
+    },
+    {
+      "id": "w14",
+      "client": "urbanloom",
+      "project": "p5",
+      "release": "r8",
+      "type": "Bug fix",
+      "title": "Myntra inventory delta drift",
+      "delivered": "2026-09-22",
+      "billing": "Fixed",
+      "amount": 0,
+      "hours": 0,
+      "rate": 0,
+      "invoice": ""
+    },
+    {
+      "id": "w15",
+      "client": "urbanloom",
+      "project": "p5",
+      "release": "",
+      "type": "Feature",
+      "title": "Myntra connector",
+      "delivered": "2026-08-25",
+      "billing": "Fixed",
+      "amount": 70000,
+      "hours": 0,
+      "rate": 0,
+      "invoice": "INV-2026-0131"
+    },
+    {
+      "id": "w16",
+      "client": "saffron",
+      "project": "p9",
+      "release": "",
+      "type": "Support",
+      "title": "Aggregator sandbox credentials troubleshooting",
+      "delivered": "2026-10-01",
+      "billing": "Hourly",
+      "amount": 0,
+      "hours": 3,
+      "rate": 1500,
+      "invoice": ""
+    }
+  ],
+  "releases": [
+    {
+      "id": "r1",
+      "client": "urbanloom",
+      "project": "p4",
+      "version": "v3.8.0",
+      "env": "PROD",
+      "date": "2026-10-08",
+      "status": "Deployed",
+      "by": "SK",
+      "features": ["Size-guide recommendations", "Express checkout for repeat buyers"],
+      "fixes": ["Cart drawer flicker on iOS"],
+      "issues": ["Size guide missing for 12 legacy SKUs"],
+      "mail": "Sent"
+    },
+    {
+      "id": "r2",
+      "client": "kaveri",
+      "project": "p2",
+      "version": "v2.14.1",
+      "env": "STG",
+      "date": "2026-10-07",
+      "status": "In QA",
+      "by": "FA",
+      "features": ["Partial-refund webhook support"],
+      "fixes": ["Duplicate COD order on retry", "GST rounding on combo SKUs"],
+      "issues": [],
+      "mail": "Not sent"
+    },
+    {
+      "id": "r3",
+      "client": "voltix",
+      "project": "p8",
+      "version": "v1.4.0",
+      "env": "QA",
+      "date": "2026-10-10",
+      "status": "Scheduled",
+      "by": "SK",
+      "features": ["Bulk price updates", "Returns dashboard"],
+      "fixes": ["CSV export timezone"],
+      "issues": [],
+      "mail": "Scheduled"
+    },
+    {
+      "id": "r4",
+      "client": "brewcraft",
+      "project": "p6",
+      "version": "v1.9.0",
+      "env": "PROD",
+      "date": "2026-10-03",
+      "status": "Deployed",
+      "by": "NJ",
+      "features": ["Pause subscription from app", "Brew timer widgets"],
+      "fixes": ["Stripe SCA retry loop"],
+      "issues": [],
+      "mail": "Sent"
+    },
+    {
+      "id": "r5",
+      "client": "saffron",
+      "project": "p9",
+      "version": "v0.9.2",
+      "env": "STG",
+      "date": "2026-09-30",
+      "status": "Failed",
+      "by": "FA",
+      "features": ["Swiggy menu push"],
+      "fixes": [],
+      "issues": ["Sandbox credentials rejected by aggregator"],
+      "mail": "Not sent"
+    },
+    {
+      "id": "r6",
+      "client": "kaveri",
+      "project": "p3",
+      "version": "v2.3.0",
+      "env": "PROD",
+      "date": "2026-09-29",
+      "status": "Rolled back",
+      "by": "NJ",
+      "features": ["Reorder from order history"],
+      "fixes": ["Push notification deep links"],
+      "issues": ["Crash on Android 11 checkout"],
+      "mail": "Sent"
+    },
+    {
+      "id": "r7",
+      "client": "kaveri",
+      "project": "p1",
+      "version": "v4.2.0",
+      "env": "PROD",
+      "date": "2026-09-24",
+      "status": "Deployed",
+      "by": "SK",
+      "features": ["Festive collection landing pages", "Wishlist sync across devices"],
+      "fixes": ["PDP image zoom on Safari"],
+      "issues": [],
+      "mail": "Sent"
+    },
+    {
+      "id": "r8",
+      "client": "urbanloom",
+      "project": "p5",
+      "version": "v1.6.2",
+      "env": "PROD",
+      "date": "2026-09-22",
+      "status": "Deployed",
+      "by": "FA",
+      "features": [],
+      "fixes": ["Myntra inventory delta drift"],
+      "issues": [],
+      "mail": "Sent"
+    }
+  ],
+  "emails": [
+    {
+      "id": "e1",
+      "client": "urbanloom",
+      "to": "Rohan Mehta, Sneha Kulkarni",
+      "subject": "UrbanLoom Storefront v3.8.0 is live",
+      "template": "Software Release Announcement",
+      "date": "2026-10-08 09:20",
+      "status": "Sent"
+    },
+    {
+      "id": "e2",
+      "client": "urbanloom",
+      "to": "Rohan Mehta",
+      "subject": "Domain urbanloom.co expires in 7 days",
+      "template": "Domain Expiry Reminder",
+      "date": "2026-10-07 10:00",
+      "status": "Delivered"
+    },
+    {
+      "id": "e3",
+      "client": "kaveri",
+      "to": "Ananya Rao, Karan Desai",
+      "subject": "Scheduled maintenance — 12 Oct, 1:00–2:00 AM IST",
+      "template": "Scheduled Maintenance",
+      "date": "2026-10-06 16:45",
+      "status": "Delivered"
+    },
+    {
+      "id": "e4",
+      "client": "urbanloom",
+      "to": "accounts@urbanloom.example",
+      "subject": "Payment reminder — INV-2026-0145",
+      "template": "Payment Reminder",
+      "date": "2026-10-05 11:00",
+      "status": "Failed"
+    },
+    {
+      "id": "e5",
+      "client": "kaveri",
+      "to": "accounts@kaverinaturals.example",
+      "subject": "Invoice INV-2026-0143 from D Solutions",
+      "template": "Invoice Notification",
+      "date": "2026-10-03 12:10",
+      "status": "Delivered"
+    },
+    {
+      "id": "e6",
+      "client": "brewcraft",
+      "to": "finance@brewcraft.example",
+      "subject": "Payment reminder — INV-2026-0139 (overdue)",
+      "template": "Payment Reminder",
+      "date": "2026-10-02 10:30",
+      "status": "Delivered"
+    },
+    {
+      "id": "e7",
+      "client": "kaveri",
+      "to": "Ananya Rao",
+      "subject": "Domain renewal reminder: kaverinaturals.in",
+      "template": "Domain Expiry Reminder",
+      "date": "2026-10-12 09:00",
+      "status": "Scheduled"
+    },
+    {
+      "id": "e8",
+      "client": "voltix",
+      "to": "Arjun Shetty",
+      "subject": "Release notes — Admin Console v1.4.0",
+      "template": "Software Release Announcement",
+      "date": "",
+      "status": "Draft"
+    }
+  ],
+  "templates": {
+    "Software Release Announcement": {
+      "subject": "{{project}} {{version}} is live",
+      "body": "<p>Hi {{contact}},</p><p>We have released <b>{{project}} {{version}}</b> to production.</p><p><b>What’s new</b></p><ul><li>Feature one</li><li>Feature two</li></ul><p>No action is needed on your side. Reply to this email if you notice anything unexpected.</p><p>Regards,<br>D Solutions</p>"
+    },
+    "Scheduled Maintenance": {
+      "subject": "Scheduled maintenance — [date], [time window] IST",
+      "body": "<p>Hi {{contact}},</p><p>We will carry out scheduled maintenance on <b>{{client}}</b> systems on <b>[date]</b> between <b>[time window] IST</b>. The storefront may be briefly unavailable.</p><p>Regards,<br>D Solutions</p>"
+    },
+    "Domain Expiry Reminder": {
+      "subject": "Domain renewal reminder for {{client}}",
+      "body": "<p>Hi {{contact}},</p><p>Your domain <b>[domain]</b> expires on <b>[date]</b>. Please confirm renewal so we can renew it without interruption.</p><p>Regards,<br>D Solutions</p>"
+    },
+    "Hosting Renewal": {
+      "subject": "Hosting renewal due for {{client}}",
+      "body": "<p>Hi {{contact}},</p><p>The hosting plan for <b>{{client}}</b> renews on <b>[date]</b> for <b>[amount]</b>. Let us know if you want to change the plan.</p><p>Regards,<br>D Solutions</p>"
+    },
+    "Invoice Notification": {
+      "subject": "Invoice [invoice no.] from D Solutions",
+      "body": "<p>Hi {{contact}},</p><p>Please find attached invoice <b>[invoice no.]</b> for <b>[amount]</b>, due on <b>[due date]</b>.</p><p>Regards,<br>D Solutions Accounts</p>"
+    },
+    "Payment Reminder": {
+      "subject": "Payment reminder — [invoice no.]",
+      "body": "<p>Hi {{contact}},</p><p>This is a friendly reminder that invoice <b>[invoice no.]</b> for <b>[amount]</b> was due on <b>[due date]</b>. If you have already paid, please share the transaction reference.</p><p>Regards,<br>D Solutions Accounts</p>"
+    },
+    "General Business Announcement": {
+      "subject": "An update from D Solutions",
+      "body": "<p>Hi {{contact}},</p><p>[Your announcement]</p><p>Regards,<br>D Solutions</p>"
+    }
+  }
+}

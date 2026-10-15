@@ -1,0 +1,168 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Theme tokens (HSL channels, used as hsl(var(--x))). Light by default, .dark on <html> overrides.
+ * Colours come from the prototype. Status pairs (ok/warn/bad/info/purple) drive StatusBadge.
+ */
+@layer base {
+  :root {
+    --background: 220 20% 97.1%;
+    --foreground: 222 45.1% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 45.1% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 45.1% 10%;
+    --surface-2: 210 20% 98%;
+    --primary: 243 75.4% 58.6%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 245 57.9% 50.6%;
+    --primary-soft: 233 100% 96.7%;
+    --primary-soft-foreground: 244 60.2% 49.2%;
+    --secondary: 216 21.7% 95.5%;
+    --secondary-foreground: 222 45.1% 10%;
+    --muted: 216 21.7% 95.5%;
+    --muted-foreground: 216 13.1% 42%;
+    --subtle-foreground: 218 19% 32.9%;
+    --accent: 216 21.7% 95.5%;
+    --accent-foreground: 222 45.1% 10%;
+    --destructive: 357 69.8% 44.1%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 13.6% 91.4%;
+    --border-strong: 217 17.3% 85.3%;
+    --input: 220 13.6% 91.4%;
+    --ring: 243 75.4% 58.6%;
+    --radius: 0.625rem;
+
+    /* chart series (validated categorical slots 1–2, light) */
+    --series-1: #2a78d6;
+    --series-2: #eb6834;
+    --ok: 160 91.7% 23.5%;
+    --ok-bg: 152 48.4% 93.9%;
+    --warn: 32 100% 30.2%;
+    --warn-bg: 40 100% 94.1%;
+    --bad: 357 69.8% 44.1%;
+    --bad-bg: 356 80% 96.1%;
+    --info: 221 75.5% 46.5%;
+    --info-bg: 219 90.9% 95.7%;
+    --purple: 264 57.6% 50%;
+    --purple-bg: 265 81% 95.9%;
+
+    --sidebar-width: 248px;
+    --sidebar-width-collapsed: 68px;
+  }
+
+  .dark {
+    --background: 220 29% 6.1%;
+    --foreground: 220 24.3% 92.7%;
+    --card: 220 25% 9.4%;
+    --card-foreground: 220 24.3% 92.7%;
+    --popover: 220 25% 9.4%;
+    --popover-foreground: 220 24.3% 92.7%;
+    --surface-2: 219 24.1% 11.4%;
+    --primary: 237 88.5% 72.7%;
+    --primary-foreground: 220 29% 6.1%;
+    --primary-hover: 236 91.1% 78%;
+    --primary-soft: 232 29.9% 19%;
+    --primary-soft-foreground: 236 92.9% 83.5%;
+    --secondary: 220 22.4% 13.1%;
+    --secondary-foreground: 220 24.3% 92.7%;
+    --muted: 220 22.4% 13.1%;
+    --muted-foreground: 219 13.7% 62.7%;
+    --subtle-foreground: 218 16.2% 73.3%;
+    --accent: 219 22.7% 14.7%;
+    --accent-foreground: 220 24.3% 92.7%;
+    --destructive: 357 83.6% 73.7%;
+    --destructive-foreground: 220 29% 6.1%;
+    --border: 218 20.4% 18.2%;
+    --border-strong: 218 18.8% 25.1%;
+    --input: 218 20.4% 18.2%;
+    --ring: 237 88.5% 72.7%;
+
+    --series-1: #3987e5;
+    --series-2: #d95926;
+    --ok: 158 60% 56.9%;
+    --ok-bg: 183 29.6% 13.9%;
+    --warn: 37 86.1% 63.3%;
+    --warn-bg: 33 11.1% 15.9%;
+    --bad: 357 83.6% 73.7%;
+    --bad-bg: 316 13.3% 16.3%;
+    --info: 219 89.6% 73.5%;
+    --info-bg: 219 28.9% 17.6%;
+    --purple: 261 85.3% 78.6%;
+    --purple-bg: 243 19.6% 19%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    color-scheme: light;
+  }
+  html.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: 'cv11', 'ss01';
+  }
+
+  /* Date inputs: the same text size as other inputs, the calendar icon at the right edge
+     (Chrome otherwise leaves an empty gap after it), and a compact width. */
+  input[type='date'] {
+    max-width: 168px;
+    font-variant-numeric: tabular-nums;
+  }
+  input[type='date']::-webkit-datetime-edit {
+    padding: 0;
+  }
+  input[type='date']::-webkit-calendar-picker-indicator {
+    margin-left: auto;
+    cursor: pointer;
+    opacity: 0.55;
+  }
+  input[type='date']::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+  }
+}
+
+/* Email bodies: the rich-text editor, previews and stored emails. */
+@layer components {
+  .email-body p {
+    margin: 0 0 0.75em;
+  }
+  .email-body ul {
+    list-style: disc;
+    padding-left: 1.4em;
+    margin: 0 0 0.75em;
+  }
+  .email-body ol {
+    list-style: decimal;
+    padding-left: 1.4em;
+    margin: 0 0 0.75em;
+  }
+  .email-body a {
+    color: #4f46e5;
+    text-decoration: underline;
+  }
+  .email-body h2 {
+    font-size: 1.15em;
+    font-weight: 600;
+    margin: 0 0 0.5em;
+  }
+  .email-body h3 {
+    font-weight: 600;
+    margin: 0 0 0.5em;
+  }
+  .email-body blockquote {
+    border-left: 3px solid #e2e8f0;
+    padding-left: 0.75em;
+    color: #64748b;
+  }
+  .email-body > :last-child {
+    margin-bottom: 0;
+  }
+}

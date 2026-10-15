@@ -1,0 +1,16 @@
+-- Default email templates (shared/src/render/defaultTemplates.ts). Existing names are left alone.
+INSERT INTO `email_templates` (`id`, `name`, `subject`, `body_html`) VALUES ('et_default_1', 'Software Release Announcement', '{{project}} {{version}} is live', '<p>Hi {{contact}},</p><p>We have released <b>{{project}} {{version}}</b> to production.</p>{{release_notes}}<p>No action is needed on your side. Reply to this email if you notice anything unexpected.</p><p>Regards,<br>{{company}}</p>') ON CONFLICT DO NOTHING;
+--> statement-breakpoint
+INSERT INTO `email_templates` (`id`, `name`, `subject`, `body_html`) VALUES ('et_default_2', 'Invoice Notification', 'Invoice {{invoice_no}} from {{company}}', '<p>Hi {{contact}},</p><p>Please find invoice <b>{{invoice_no}}</b> for <b>{{amount}}</b>, due on <b>{{due_date}}</b>. Use the button below to view or download it.</p><p>Regards,<br>{{company}} Accounts</p>') ON CONFLICT DO NOTHING;
+--> statement-breakpoint
+INSERT INTO `email_templates` (`id`, `name`, `subject`, `body_html`) VALUES ('et_default_3', 'Payment Receipt', 'Payment received — {{invoice_no}}', '<p>Hi {{contact}},</p><p>Thank you — we have received <b>{{amount}}</b> against invoice <b>{{invoice_no}}</b>. Your receipt number is <b>{{receipt_no}}</b>.</p><p>Regards,<br>{{company}} Accounts</p>') ON CONFLICT DO NOTHING;
+--> statement-breakpoint
+INSERT INTO `email_templates` (`id`, `name`, `subject`, `body_html`) VALUES ('et_default_4', 'Payment Reminder', 'Payment reminder — {{invoice_no}}', '<p>Hi {{contact}},</p><p>This is a friendly reminder that invoice <b>{{invoice_no}}</b> for <b>{{amount}}</b> was due on <b>{{due_date}}</b>. If you have already paid, please share the transaction reference.</p><p>Regards,<br>{{company}} Accounts</p>') ON CONFLICT DO NOTHING;
+--> statement-breakpoint
+INSERT INTO `email_templates` (`id`, `name`, `subject`, `body_html`) VALUES ('et_default_5', 'Domain Expiry Reminder', 'Domain renewal reminder for {{client_name}}', '<p>Hi {{contact}},</p><p>Your domain <b>{{domain}}</b> expires on <b>{{expiry}}</b>. Please confirm renewal so we can renew it without interruption.</p><p>Regards,<br>{{company}}</p>') ON CONFLICT DO NOTHING;
+--> statement-breakpoint
+INSERT INTO `email_templates` (`id`, `name`, `subject`, `body_html`) VALUES ('et_default_6', 'Hosting Renewal', 'Hosting renewal due for {{client_name}}', '<p>Hi {{contact}},</p><p>The hosting plan for <b>{{client_name}}</b> renews on <b>{{expiry}}</b> for <b>{{amount}}</b>. Let us know if you want to change the plan.</p><p>Regards,<br>{{company}}</p>') ON CONFLICT DO NOTHING;
+--> statement-breakpoint
+INSERT INTO `email_templates` (`id`, `name`, `subject`, `body_html`) VALUES ('et_default_7', 'Maintenance Notice', 'Scheduled maintenance — [date], [time window] IST', '<p>Hi {{contact}},</p><p>We will carry out scheduled maintenance on <b>{{client_name}}</b> systems on <b>[date]</b> between <b>[time window] IST</b>. The storefront may be briefly unavailable.</p><p>Regards,<br>{{company}}</p>') ON CONFLICT DO NOTHING;
+--> statement-breakpoint
+INSERT INTO `email_templates` (`id`, `name`, `subject`, `body_html`) VALUES ('et_default_8', 'General', 'An update from {{company}}', '<p>Hi {{contact}},</p><p>[Your announcement]</p><p>Regards,<br>{{company}}</p>') ON CONFLICT DO NOTHING;

@@ -1,0 +1,11 @@
+# Only for the local restore drill (npm run backup -- --local / npm run restore -- --local):
+# its local database lives in server/drill/.wrangler, apart from your `npm run dev` data.
+name = "dsol-portal-drill"
+main = "../src/index.ts"
+compatibility_date = "2025-09-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "dsol-portal-drill"
+database_id = "00000000-0000-0000-0000-000000000000"
+migrations_dir = "../migrations"

@@ -1,0 +1,66 @@
+{
+  "name": "d-solutions-business-portal",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "shared",
+    "server",
+    "client"
+  ],
+  "engines": {
+    "node": ">=20.19"
+  },
+  "scripts": {
+    "dev": "concurrently -k -n server,client -c blue,green \"npm:dev -w server\" \"npm:dev -w client\"",
+    "dev:server": "npm run dev -w server",
+    "dev:client": "npm run dev -w client",
+    "build": "npm run build -w client",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "npm run test --workspaces --if-present",
+    "gen:key": "npm run gen:key -w server --silent",
+    "db:generate": "npm run db:generate -w server",
+    "db:migrate:local": "npm run db:migrate:local -w server",
+    "db:seed": "npm run db:seed -w server",
+    "test:coverage": "npm run test:coverage -w server",
+    "test:e2e": "playwright test",
+    "check:bundle": "node scripts/check-bundle.mjs",
+    "setup:staging": "node scripts/setup-cloudflare.mjs --env staging",
+    "setup:prod": "node scripts/setup-cloudflare.mjs --env production",
+    "first-run": "tsx scripts/first-run.mjs",
+    "db:migrate:staging": "node scripts/deploy.mjs migrate --env staging",
+    "db:migrate:prod": "node scripts/deploy.mjs migrate --env production",
+    "deploy:server:staging": "node scripts/deploy.mjs server --env staging",
+    "deploy:server:prod": "node scripts/deploy.mjs server --env production",
+    "deploy:client:staging": "node scripts/deploy.mjs client --env staging",
+    "deploy:client:prod": "node scripts/deploy.mjs client --env production",
+    "deploy:staging": "npm run db:migrate:staging && npm run deploy:server:staging && npm run deploy:client:staging",
+    "deploy:prod": "npm run db:migrate:prod && npm run deploy:server:prod && npm run deploy:client:prod",
+    "restore": "node scripts/restore.mjs",
+    "rotate-key": "tsx server/scripts/rotate-key.ts",
+    "backup": "node scripts/backup.mjs",
+    "backup:keygen": "node scripts/backup-keygen.mjs"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.10.2",
+    "@eslint/js": "^9.28.0",
+    "@playwright/test": "1.55.0",
+    "age-encryption": "0.3.1",
+    "concurrently": "^9.1.2",
+    "eslint": "^9.28.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.20",
+    "globals": "^16.2.0",
+    "prettier": "^3.5.3",
+    "prettier-plugin-tailwindcss": "^0.6.12",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.33.0"
+  },
+  "overrides": {
+    "@tiptap/extension-bubble-menu": "3.31.3",
+    "@tiptap/extension-floating-menu": "3.31.3"
+  }
+}

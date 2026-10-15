@@ -1,0 +1,32 @@
+# Every 6 hours: the production health endpoint must answer 200 (database reachable, daily job ran
+# in the last 26 hours). A failed run makes GitHub email the repository owner.
+# Set the repository variable HEALTH_URL, e.g. https://app.example.com/api/health
+name: Health check
+
+on:
+  schedule:
+    - cron: '17 */6 * * *'
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: GET /api/health
+        env:
+          HEALTH_URL: ${{ vars.HEALTH_URL }}
+        run: |
+          if [ -z "$HEALTH_URL" ]; then
+            echo "::warning::Set the repository variable HEALTH_URL (docs/DEPLOY.md, step 10)"
+            exit 0
+          fi
+          code=$(curl -sS --max-time 20 -o body.json -w '%{http_code}' "$HEALTH_URL" || echo 000)
+          cat body.json || true
+          echo
+          if [ "$code" != "200" ]; then
+            echo "::error::Health check failed with HTTP $code — see docs/OPERATIONS.md (Monitoring)"
+            exit 1
+          fi

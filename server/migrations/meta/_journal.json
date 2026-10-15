@@ -1,0 +1,76 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1791804117317,
+      "tag": "0000_init",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1791873710140,
+      "tag": "0001_natural_leo",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1791900000000,
+      "tag": "0002_default_templates",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1791876059988,
+      "tag": "0003_gorgeous_jocasta",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1791881793485,
+      "tag": "0004_red_galactus",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1791888519883,
+      "tag": "0005_fuzzy_zemo",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "6",
+      "when": 1792057320910,
+      "tag": "0006_fast_shinobi_shaw",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "6",
+      "when": 1792058661223,
+      "tag": "0007_ordinary_odin",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "6",
+      "when": 1792060401079,
+      "tag": "0008_owner_to_admin",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "6",
+      "when": 1792061839017,
+      "tag": "0009_drop_at_risk_and_project_archive",
+      "breakpoints": true
+    }
+  ]
+}

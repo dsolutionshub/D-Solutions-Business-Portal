@@ -1,0 +1,48 @@
+# push to main → production · push to staging → staging.
+# Order: CI → D1 migrations → Worker → Pages. Migrations are backward-compatible (they only add
+# tables, columns or rows), so the running Worker keeps working until the new one is live.
+name: Deploy
+
+on:
+  push:
+    branches: [main, staging]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    uses: ./.github/workflows/ci.yml
+
+  deploy:
+    needs: ci
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    # GitHub environments "production" / "staging" hold the secrets; add required reviewers there
+    # if you want an approval step before production deploys.
+    environment: ${{ github.ref_name == 'main' && 'production' || 'staging' }}
+    concurrency:
+      group: deploy-${{ github.ref_name }}
+      cancel-in-progress: false
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      TARGET: ${{ github.ref_name == 'main' && 'production' || 'staging' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: 1. Database migrations
+        run: node scripts/deploy.mjs migrate --env "$TARGET"
+      - name: 2. API Worker
+        run: node scripts/deploy.mjs server --env "$TARGET"
+      - name: 3. App (Pages)
+        env:
+          # empty (the normal set-up): the app calls /api on its own domain. Only the no-custom-domain
+          # fallback in docs/DEPLOY.md sets this repository variable.
+          VITE_API_BASE: ${{ vars.VITE_API_BASE }}
+        run: node scripts/deploy.mjs client --env "$TARGET"

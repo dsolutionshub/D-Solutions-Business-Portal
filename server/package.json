@@ -1,0 +1,32 @@
+{
+  "name": "@dsol/server",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npm run db:migrate:local && wrangler dev --port 8787 --test-scheduled",
+    "gen:key": "node scripts/gen-key.mjs",
+    "db:generate": "node scripts/drizzle-kit.mjs generate",
+    "db:migrate:local": "wrangler d1 migrations apply DB --local",
+    "db:seed": "tsx seed/seed.ts && wrangler d1 execute DB --local --file seed/.seed.sql",
+    "typecheck": "tsc -p tsconfig.json && tsc -p seed/tsconfig.json && tsc -p e2e-fixture/tsconfig.json",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage"
+  },
+  "dependencies": {
+    "@dsol/shared": "*",
+    "drizzle-orm": "^0.45.4",
+    "hono": "^4.9.6",
+    "nanoid": "^5.1.16",
+    "zod": "^4.1.5"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20261012.1",
+    "@types/node": "^22.20.5",
+    "@vitest/coverage-v8": "3.2.7",
+    "drizzle-kit": "^0.31.11",
+    "tsx": "^4.23.15",
+    "vitest": "^3.2.4",
+    "wrangler": "^4.34.0"
+  }
+}
