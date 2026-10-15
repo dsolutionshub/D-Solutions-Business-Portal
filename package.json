@@ -37,7 +37,7 @@
     "deploy:client:staging": "node scripts/deploy.mjs client --env staging",
     "deploy:client:prod": "node scripts/deploy.mjs client --env production",
     "deploy:staging": "npm run db:migrate:staging && npm run deploy:server:staging && npm run deploy:client:staging",
-    "deploy:prod": "npm run db:migrate:prod && npm run deploy:server:prod && npm run deploy:client:prod",
+    "deploy:prod": "npm run db:migrate:prod && npm run deploy:server:prod",
     "restore": "node scripts/restore.mjs",
     "rotate-key": "tsx server/scripts/rotate-key.ts",
     "backup": "node scripts/backup.mjs",

@@ -68,12 +68,21 @@ export const limitBody: MiddlewareHandler<AppEnv> = async (c, next) => {
  * Changes (POST/PUT/PATCH/DELETE) per user per minute, per Worker instance. A brake on runaway
  * scripts and stuck buttons; the edge rate-limiting rule in docs/DEPLOY.md is the hard limit.
  */
+/**
+ * The caller's IP. Behind the Netlify proxy (the app's /api/* is forwarded to this Worker) Cloudflare
+ * sees Netlify's server, so Netlify's x-nf-client-connection-ip is preferred. Only used for the
+ * in-memory throttles; a caller can set that header themselves, which is why per-account lockout,
+ * not these limits, is the real guard against password guessing.
+ */
+export const clientIp = (c: { req: { header: (name: string) => string | undefined } }) =>
+  c.req.header('x-nf-client-connection-ip') ?? c.req.header('cf-connecting-ip');
+
 export const MUTATIONS_PER_MINUTE = 120;
 const windows = new Map<string, { start: number; count: number }>();
 
 export const rateLimitMutations = createMiddleware<AppEnv>(async (c, next) => {
   if (c.req.method === 'GET' || c.req.method === 'HEAD' || c.req.method === 'OPTIONS') return next();
-  const key = c.get('user')?.id ?? c.req.header('cf-connecting-ip') ?? 'anon';
+  const key = c.get('user')?.id ?? clientIp(c) ?? 'anon';
   const now = Date.now();
   const w = windows.get(key);
   if (!w || now - w.start >= 60_000) windows.set(key, { start: now, count: 1 });

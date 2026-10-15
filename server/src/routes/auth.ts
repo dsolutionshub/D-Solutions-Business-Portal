@@ -26,6 +26,7 @@ import { iterationsFrom } from '../services/password';
 import type { AppEnv, Env } from '../env';
 import { HttpError } from '../middleware/errors';
 import { permissionsFor } from '../db/repos/roles';
+import { clientIp } from '../middleware/hardening';
 import { validate } from '../middleware/validate';
 
 /** The session cookie. `__Host-` (HTTPS, whole site, no Domain) when deployed; a plain name on http://localhost. */
@@ -46,7 +47,7 @@ export const sessionToken = (c: Context<AppEnv>) => getCookie(c, sessionCookieNa
 /* Sign-in attempts per IP per minute, per Worker instance (account lockout is the real guard). */
 const attempts = new Map<string, { start: number; count: number }>();
 function throttle(c: Context<AppEnv>, max: number) {
-  const ip = c.req.header('cf-connecting-ip') ?? 'local';
+  const ip = clientIp(c) ?? 'local';
   const key = `${c.req.path}:${ip}`;
   const now = Date.now();
   const w = attempts.get(key);

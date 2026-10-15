@@ -1,0 +1,28 @@
+# Netlify hosts the app (the React build). The API and database run on Cloudflare (a Worker + D1):
+# every request to /api/* is forwarded to the Worker, so the browser only ever talks to this
+# site — the sign-in cookie, CORS and the security headers all stay same-origin.
+#
+# Netlify reads this file from the repository root on every deploy. See docs/DEPLOY.md.
+
+[build]
+  # npm workspaces: Netlify installs everything from the root package-lock.json first
+  command = "npm run build && node scripts/check-bundle.mjs"
+  publish = "client/dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+  # VITE_API_BASE stays unset: the app calls /api on this same site (forwarded below)
+
+# 1. The API: forwarded to the Cloudflare Worker. REPLACE the address with your Worker's
+#    (docs/DEPLOY.md step 9 prints it, e.g. https://dsol-portal-api.<your-subdomain>.workers.dev).
+[[redirects]]
+  from = "/api/*"
+  to = "https://dsol-portal-api.REPLACE.workers.dev/api/:splat"
+  status = 200
+  force = true
+
+# 2. Everything else is the single-page app.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

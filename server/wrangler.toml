@@ -1,8 +1,8 @@
 # Cloudflare Worker for the D Solutions Business Portal API.
 #
 #   local:       `npm run dev` (uses the top level below + server/.dev.vars)
-#   staging:     `npm run deploy:server:staging`     → [env.staging]
-#   production:  `npm run deploy:server:prod`        → [env.production]
+#   production:  `npm run deploy:server:prod`        → [env.production]   (docs/DEPLOY.md)
+#   staging:     `npm run deploy:server:staging`     → [env.staging]      (optional, not set up yet)
 #
 # Secrets are NOT set here. Per environment:
 #   npx wrangler secret put ENCRYPTION_KEY --env production
@@ -77,18 +77,23 @@ enabled = true
 # ────────────────────────────────────────────────────────── production ──
 [env.production]
 name = "dsol-portal-api"
-workers_dev = false
-routes = [{ pattern = "app.example.com/api/*", zone_name = "example.com" }] # REPLACE domain
+# The app is on Netlify, which forwards /api/* to this Worker's workers.dev address
+# (netlify.toml). Everything except /api/health and the signed /api/public links needs a sign-in.
+workers_dev = true
 
 [env.production.vars]
 ENVIRONMENT = "production"
-APP_URL = "https://app.example.com"                            # REPLACE
+# The Netlify site's address (DEPLOY.md step 8), e.g. "https://dsol-portal.netlify.app"
+APP_URL = "https://REPLACE.netlify.app"
 # Optional: only if Cloudflare Access sits in front. Empty = portal passwords only.
 ACCESS_TEAM_DOMAIN = ""   # e.g. "your-team.cloudflareaccess.com"
 ACCESS_AUD = ""           # the production Access application's AUD tag
 EMAIL_FROM_ADDRESS = "no-reply@example.com"                    # REPLACE
 EMAIL_FROM_NAME = "D Solutions"
 CORS_ORIGINS = ""
+# Workers FREE plan: 10 ms CPU per request, so sign-in hashing uses 20,000 rounds (~4 ms).
+# On Workers Paid, delete this line (default 100,000); passwords re-hash at next sign-in.
+PBKDF2_ITERATIONS = "20000"
 
 [[env.production.d1_databases]]
 binding = "DB"

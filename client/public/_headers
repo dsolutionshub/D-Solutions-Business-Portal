@@ -1,4 +1,4 @@
-# Cloudflare Pages response headers for the app (the API sets its own in the Worker).
+# Response headers for the app (Netlify reads this file from the build output; the API sets its own in the Worker).
 /*
   Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
   X-Frame-Options: DENY

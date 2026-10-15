@@ -22,7 +22,7 @@ permissions they pick (Team & Permissions → Role permissions).
 | `server` | Cloudflare Workers, Hono, Drizzle ORM, D1 (SQLite), R2, Cron Triggers, Brevo                                       |
 | `shared` | Zod schemas, types, constants, the permission map and pure business rules used by both                             |
 
-Everything runs on free tiers: Cloudflare Workers, Pages, D1, R2 and Access, and Brevo (300 emails a day).
+Everything runs on free tiers: Cloudflare Workers, D1 and R2 (API and data), Netlify (the app) and Brevo (300 emails a day).
 
 - Deploying: **[docs/DEPLOY.md](docs/DEPLOY.md)**.
 - Running it (backups, restore, key rotation, limits): **[docs/OPERATIONS.md](docs/OPERATIONS.md)**.
@@ -74,26 +74,26 @@ CI runs all of these on every pull request (`.github/workflows/ci.yml`).
 
 ## All scripts
 
-| Command                                                             | What it does                                                                |
-| ------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| `npm run dev`                                                       | App + API together                                                          |
-| `npm run build`                                                     | Production build of the app (`client/dist`)                                 |
-| `npm run db:generate`                                               | New SQL migration from `server/src/db/schema.ts`                            |
-| `npm run db:migrate:local` / `:staging` / `:prod`                   | Apply migrations                                                            |
-| `npm run db:seed`                                                   | Wipe the **local** database back to real starting data (you as Admin)       |
-| `npm run setup:staging` / `setup:prod`                              | Create the Cloudflare D1 / R2 / Pages resources if missing (docs/DEPLOY.md) |
-| `npm run first-run -- --env production --owner … --name …`          | Empty production: settings, dropdown lists, first Admin                     |
-| `npm run deploy:staging` / `deploy:prod`                            | Migrate → Worker → Pages (CI does this on push)                             |
-| `npm run backup -- --env production`                                | Encrypted export (CI does this weekly)                                      |
-| `npm run restore -- --env staging --file … --identity … --counts …` | Restore a backup (docs/OPERATIONS.md)                                       |
-| `npm run backup:keygen -- --out <path>`                             | Create the backup encryption key pair                                       |
-| `npm run rotate-key -- --env production [--apply]`                  | Re-encrypt all secrets with a new `ENCRYPTION_KEY` (docs/OPERATIONS.md)     |
-| `npm run gen:key`                                                   | Print a new random `ENCRYPTION_KEY`                                         |
+| Command                                                             | What it does                                                            |
+| ------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `npm run dev`                                                       | App + API together                                                      |
+| `npm run build`                                                     | Production build of the app (`client/dist`)                             |
+| `npm run db:generate`                                               | New SQL migration from `server/src/db/schema.ts`                        |
+| `npm run db:migrate:local` / `:staging` / `:prod`                   | Apply migrations                                                        |
+| `npm run db:seed`                                                   | Wipe the **local** database back to real starting data (you as Admin)   |
+| `npm run setup:staging` / `setup:prod`                              | Create the Cloudflare D1 / R2 resources if missing (docs/DEPLOY.md)     |
+| `npm run first-run -- --env production --owner … --name …`          | Empty production: settings, dropdown lists, first Admin                 |
+| `npm run deploy:staging` / `deploy:prod`                            | Migrate → Worker (CI does this on push; Netlify builds the app)         |
+| `npm run backup -- --env production`                                | Encrypted export (CI does this weekly)                                  |
+| `npm run restore -- --env staging --file … --identity … --counts …` | Restore a backup (docs/OPERATIONS.md)                                   |
+| `npm run backup:keygen -- --out <path>`                             | Create the backup encryption key pair                                   |
+| `npm run rotate-key -- --env production [--apply]`                  | Re-encrypt all secrets with a new `ENCRYPTION_KEY` (docs/OPERATIONS.md) |
+| `npm run gen:key`                                                   | Print a new random `ENCRYPTION_KEY`                                     |
 
 ## Folder structure
 
 ```
-client/                 the app (Cloudflare Pages)
+client/                 the app (hosted on Netlify)
   public/_headers       security headers (CSP, HSTS, …) for the app
   src/app/              shell, router (every page is lazy-loaded), layout, theme
   src/components/       shared UI (ui/ = shadcn primitives, common/ = app building blocks)

@@ -72,17 +72,19 @@ it shows the key matters.
 
 ### Restore drill (do this once before go-live, then twice a year)
 
+There is no staging copy, so the drill restores a real production backup into a **separate local
+database on your computer** (`server/drill/`). Production is never touched.
+
 1. Run the backup: GitHub → _Actions → Backup → Run workflow_. Download the artifact and unzip it.
-2. Restore it into staging with the command above.
-3. ✅ The command ends with **"Row counts match the backup"**.
-4. Open `https://staging.example.com` and check that clients, projects, invoices and payments are
-   there and match production.
-5. Optional, to test secrets too: set staging's key to production's for a moment
-   (`npx wrangler secret put ENCRYPTION_KEY --env staging`), reveal one secret, then set staging's
-   own key back.
-6. Write down the date and the result (e.g. in the repository wiki). Then refresh staging with
-   test data again if you like (`npm run first-run -- --env staging …` after re-creating it, or
-   just keep the copy).
+2. Create the empty drill database once:
+   `cd server && npx wrangler d1 migrations apply DB --local -c drill/wrangler.toml && cd ..`
+3. Restore into it:
+   ```bash
+   npm run restore -- --local --file d1-production-<time>.sql.age --identity D:\safe\dsol-backup-key.txt --counts counts-<time>.json
+   ```
+4. ✅ The command ends with **"Row counts match the backup"**. That proves the backup is complete
+   and your private key opens it.
+5. Write down the date and the result. Delete the unzipped files afterwards.
 
 You can rehearse the whole drill on your own machine without any Cloudflare account. It uses a
 separate local database under `server/drill/`:
@@ -155,17 +157,17 @@ What to do when the health check or the Admins' email fires:
 | ----------------- | ---------------------------------------------- | ---------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
 | Workers requests  | 100,000 / day                                  | a few thousand (staff × pages × ~5 calls)            | requests fail with 429 until midnight UTC → upgrade to Workers Paid (US$5/month)                            |
 | Workers CPU       | 10 ms per request                              | ~1–5 ms (D1 wait time doesn't count)                 | "Exceeded CPU" errors in logs (most likely on Reports or the daily job) → Workers Paid                      |
-| CPU at sign-in    | 10 ms per request (free)                       | ~20 ms per sign-in (password hashing)                | sign-ins fail with "exceeded CPU" → Workers Paid, or lower `PBKDF2_ITERATIONS` (DEPLOY step 23)             |
-| Cron Triggers     | 5 per account                                  | 4 (2 staging + 2 production)                         | don't add more; staging's can be removed if needed                                                          |
+| CPU at sign-in    | 10 ms per request (free)                       | ~20 ms per sign-in (password hashing)                | sign-ins fail with "exceeded CPU" → Workers Paid, or lower `PBKDF2_ITERATIONS` (DEPLOY step 4)              |
+| Cron Triggers     | 5 per account                                  | 2 (production)                                       | don't add more                                                                                              |
 | D1 reads          | 5 million rows / day                           | well under 100k                                      | queries fail until midnight UTC → Workers Paid raises it 5×+                                                |
 | D1 writes         | 100,000 rows / day                             | a few hundred                                        | as above                                                                                                    |
 | D1 storage        | 5 GB (500 MB per database)                     | a few MB                                             | archive old emails/audit rows, or Workers Paid                                                              |
 | D1 Time Travel    | 7 days                                         | —                                                    | weekly encrypted exports cover older points                                                                 |
 | R2                | 10 GB storage, 1M writes and 10M reads / month | logos + backups (MBs)                                | delete old backups from `dsol-portal-backups` (keep ≥ 8 weekly)                                             |
-| Pages             | unlimited requests                             | —                                                    | —                                                                                                           |
+| Netlify (the app) | 100 GB bandwidth, 300 build minutes / month    | small (one ~600 kB app; ~2 min per build)            | builds pause until next month → fewer pushes, or Netlify Pro                                                |
 | Cloudflare Access | 50 users                                       | the team                                             | Zero Trust paid plan                                                                                        |
 | Brevo             | 300 emails / day (counted per recipient)       | digests + client emails                              | the portal stops sending at the limit you set (Settings) and warns from 80%; raise it after upgrading Brevo |
-| GitHub Actions    | 2,000 minutes / month (private repo)           | ~10 min per deploy, ~1 min per backup / health check | fewer pushes to `staging`, or make the repository public (not recommended)                                  |
+| GitHub Actions    | 2,000 minutes / month (private repo)           | ~10 min per deploy, ~1 min per backup / health check | fewer pushes, or make the repository public (not recommended)                                               |
 
 Check actual usage in the Cloudflare dashboard: _Workers & Pages → Overview_, _D1 → the database
 → Metrics_, _R2 → Overview_. Limits change; confirm them on Cloudflare's and Brevo's pricing pages.

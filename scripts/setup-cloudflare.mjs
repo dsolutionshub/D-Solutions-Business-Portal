@@ -31,13 +31,7 @@ for (const bucket of [r.r2, ...(env === 'production' ? [BACKUP_BUCKET] : [])]) {
   }
 }
 
-// Pages project
-const pages = wrangler(['pages', 'project', 'list'], { capture: true, allowFail: true }) || '';
-if (pages.includes(r.pages)) console.log(`✔ Pages project ${r.pages} exists`);
-else {
-  wrangler(['pages', 'project', 'create', r.pages, '--production-branch', r.pagesBranch]);
-  console.log(`✔ Pages project ${r.pages} created (production branch: ${r.pagesBranch})`);
-}
+// (the app is hosted on Netlify, so no Cloudflare Pages project is created)
 
 console.log(`
 ──────────────────────────────────────────────────────────────────────
@@ -45,6 +39,6 @@ Paste into server/wrangler.toml under [[env.${env}.d1_databases]]:
 
   database_id = "${db?.uuid ?? db?.id ?? '<see npx wrangler d1 list>'}"
 
-Then continue with docs/DEPLOY.md (Access app → ACCESS_AUD, secrets, migrations, first run).
+Then continue with docs/DEPLOY.md (secrets, deploy, first run).
 ──────────────────────────────────────────────────────────────────────
 `);
