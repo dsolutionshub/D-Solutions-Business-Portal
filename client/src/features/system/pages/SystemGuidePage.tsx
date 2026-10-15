@@ -14,6 +14,8 @@ import { api } from '@/lib/api';
 const REPO = 'https://github.com/dsolutionshub/D-Solutions-Business-Portal';
 const DB_NAME = 'dsol-portal-prod';
 const WORKER_NAME = 'dsol-portal-api';
+/** Not secret: identifies the Cloudflare account (npx wrangler whoami). */
+const ACCOUNT_ID = '39dd56665e13d971deae944b75431f65';
 
 /** A terminal command with a copy button. */
 function Cmd({ children }: { children: string }) {
@@ -50,6 +52,27 @@ function Status({ ok, yes, no }: { ok: boolean; yes: string; no: string }) {
     <span className="inline-flex items-center gap-1 text-bad">
       <XCircle className="size-4" /> {no}
     </span>
+  );
+}
+
+/** One row per key: name, what it is for, where to find it, what to do if lost. */
+function KeyTable({ rows }: { rows: { name: string; what: string; where: ReactNode; note?: string }[] }) {
+  return (
+    <div className="grid gap-2.5">
+      {rows.map(r => (
+        <div key={r.name} className="rounded-lg border p-3 text-[13px]">
+          <div className="flex flex-wrap items-baseline gap-x-2">
+            <span className="font-mono text-[12.5px] font-semibold">{r.name}</span>
+            <span className="text-muted-foreground">{r.what}</span>
+          </div>
+          <div className="mt-1">
+            <span className="text-muted-foreground">Where: </span>
+            {r.where}
+          </div>
+          {r.note && <div className="mt-1 text-xs text-muted-foreground">{r.note}</div>}
+        </div>
+      ))}
+    </div>
   );
 }
 
@@ -109,7 +132,7 @@ export function SystemGuidePage() {
     <>
       <PageHeader
         title="System guide"
-        description="How this portal is built, where everything lives, and how to set it up again. Admins only."
+        description="How this portal is built, where every key lives, and how to work on it from a new computer. Admins only."
       />
       <Card>
         <Section step={1} title="Live status" description="This installation right now." open>
@@ -185,110 +208,140 @@ export function SystemGuidePage() {
 
         <Section
           step={3}
-          title="Where settings and secrets live"
-          description="Nothing secret is in the code or in GitHub."
+          title="Keys and where to find them"
+          description="No key is in the code or in GitHub's files. Where each one is, and how to change it."
         >
-          <Rows
+          <KeyTable
             rows={[
-              [
-                'ENCRYPTION_KEY',
-                'Cloudflare Worker secret. Locks project passwords/keys. Copy in the password manager — lose it and they are unreadable.'
-              ],
-              [
-                'BREVO_API_KEY',
-                'Cloudflare Worker secret. Starts with xkeysib-. Brevo → SMTP & API → API keys.'
-              ],
-              [
-                'CLOUDFLARE_API_TOKEN / ACCOUNT_ID',
-                'GitHub → Settings → Secrets → Actions. Used to deploy on push.'
-              ],
-              ['Backup private key', 'Offline only (password manager + USB). Needed to open backups.'],
-              ['App address, sender, etc.', `Not secret: server/wrangler.toml → [env.production.vars]`],
-              ['API forwarding', 'netlify.toml → the /api/* redirect to the Worker address']
-            ]}
-          />
-          <p className="text-[13px] text-muted-foreground">
-            Change a secret (the new value applies at once):
-          </p>
-          <Cmd>
-            {
-              'cd server\nnpx wrangler secret put BREVO_API_KEY --env production\nnpx wrangler secret put ENCRYPTION_KEY --env production   # only via the key rotation steps!'
-            }
-          </Cmd>
-        </Section>
-
-        <Section
-          step={4}
-          title="Set it up on a new system"
-          description="From an empty computer and new accounts to a working portal."
-        >
-          <Steps
-            items={[
               {
-                text: 'Install Node.js 22 and Git, then get the code:',
-                cmds: [`git clone ${REPO}.git\ncd D-Solutions-Business-Portal\nnpm install`]
-              },
-              {
-                text: 'Log in to Cloudflare (free account) and note the Account ID:',
-                cmds: ['npx wrangler login\nnpx wrangler whoami']
-              },
-              {
-                text: (
+                name: 'ENCRYPTION_KEY',
+                what: 'Locks the passwords and keys saved in projects.',
+                where: (
                   <>
-                    Create the database and paste the printed {code('database_id')} into server/wrangler.toml:
+                    Cloudflare dashboard →{' '}
+                    <b>Workers &amp; Pages → {WORKER_NAME} → Settings → Variables and Secrets</b>. Cloudflare
+                    shows that it exists, never the value.
                   </>
                 ),
-                cmds: ['npm run setup:prod']
+                note: 'The value was shown once, in the terminal, by "npm run gen:key". Only the person who ran it has it. Without it, saved project passwords cannot be read — never replace it without the key-rotation steps (docs/OPERATIONS.md).'
               },
               {
-                text: (
+                name: 'BREVO_API_KEY',
+                what: 'Lets the portal send email.',
+                where: (
                   <>
-                    Netlify: <b>Add new site → Import from GitHub</b> → this repository → Deploy. Turn off
-                    Visitor access protection. Put the site address in {code('APP_URL')} (wrangler.toml).
+                    Brevo → profile menu → <b>SMTP &amp; API → API keys</b> (key named <b>portal</b>, starts
+                    with {code('xkeysib-')}). Stored in Cloudflare in the same place as ENCRYPTION_KEY.
+                  </>
+                ),
+                note: 'Lost or leaked: generate a new key in Brevo, store it with the command below, delete the old one.'
+              },
+              {
+                name: 'CLOUDFLARE_API_TOKEN',
+                what: 'Lets GitHub deploy the API on every push.',
+                where: (
+                  <>
+                    Created in Cloudflare → profile icon → <b>My Profile → API Tokens</b> (“GitHub deploy
+                    (portal)”). Stored in GitHub → repository →{' '}
+                    <b>Settings → Secrets and variables → Actions</b>.
+                  </>
+                ),
+                note: 'Lost: roll it in Cloudflare and paste the new value into the GitHub secret.'
+              },
+              {
+                name: 'CLOUDFLARE_ACCOUNT_ID',
+                what: 'Which Cloudflare account to deploy to (not secret).',
+                where: (
+                  <>
+                    {code(ACCOUNT_ID)} — also shown by {code('npx wrangler whoami')}. Stored in the same
+                    GitHub page as the token.
                   </>
                 )
               },
               {
-                text: (
+                name: 'Backup key file',
+                what: 'Opens the weekly encrypted backups.',
+                where: (
                   <>
-                    Brevo: verify a sender email, create an API key (Restricted → transactional email). Put
-                    the sender in {code('EMAIL_FROM_ADDRESS')}.
-                  </>
-                )
-              },
-              {
-                text: 'Store the secrets (save the generated key in your password manager first):',
-                cmds: [
-                  'npm run gen:key\ncd server\nnpx wrangler secret put ENCRYPTION_KEY --env production\nnpx wrangler secret put BREVO_API_KEY --env production\ncd ..'
-                ]
-              },
-              {
-                text: (
-                  <>
-                    Create the tables and deploy the API. Put the printed Worker address into{' '}
-                    {code('netlify.toml')}, then commit and push:
+                    The file made by {code('npm run backup:keygen')} on the admin’s computer (e.g.{' '}
+                    {code('D:\\safe\\dsol-backup-key.txt')}). Its public half is in the repository:{' '}
+                    {code('backup/age-recipient.txt')}.
                   </>
                 ),
-                cmds: ['npm run deploy:prod', 'git add -A\ngit commit -m "Configure production"\ngit push']
+                note: 'Never upload it anywhere. Without it, backups cannot be opened.'
               },
               {
-                text: 'Create the first Admin; open the printed link and choose a password:',
-                cmds: [
-                  'npm run first-run -- --env production --owner you@example.com --name "Your Name" --company "D Solutions"'
-                ]
-              },
-              {
-                text: (
+                name: 'Admin passwords',
+                what: 'Each person’s portal sign-in.',
+                where: (
                   <>
-                    GitHub → Settings → Secrets → Actions: add {code('CLOUDFLARE_API_TOKEN')} and{' '}
-                    {code('CLOUDFLARE_ACCOUNT_ID')}. From then on every push to main deploys.
+                    Not stored anywhere readable (only a one-way hash). Forgotten: <b>Forgot password?</b> on
+                    the sign-in page.
                   </>
                 )
               }
             ]}
           />
           <p className="text-[13px] text-muted-foreground">
-            Full click-by-click version: docs/DEPLOY.md in the repository.
+            Other (not secret) settings: app address, email sender, API address →{' '}
+            {code('server/wrangler.toml')} ({code('[env.production.vars]')}) and {code('netlify.toml')}.
+          </p>
+          <p className="text-[13px] text-muted-foreground">Replace a key (the new value applies at once):</p>
+          <Cmd>{'cd server\nnpx wrangler secret put BREVO_API_KEY --env production'}</Cmd>
+        </Section>
+
+        <Section
+          step={4}
+          title="Work on it from a new computer"
+          description="For you or the next admin. Everything is already set up — this connects a computer to it."
+        >
+          <Steps
+            items={[
+              {
+                text: (
+                  <>
+                    Get access (an existing Admin does this): GitHub → repository →{' '}
+                    <b>Settings → Collaborators</b>; Cloudflare → <b>Manage Account → Members</b> (role
+                    Administrator); Netlify → <b>Team settings → Members</b>; Brevo → <b>Settings → Users</b>;
+                    portal → <b>Team &amp; Permissions → Invite user</b> (role Admin).
+                  </>
+                )
+              },
+              {
+                text: 'Install Node.js 22 (nodejs.org) and Git (git-scm.com). Then get the code:',
+                cmds: [`git clone ${REPO}.git\ncd D-Solutions-Business-Portal\nnpm install`]
+              },
+              {
+                text: 'Connect to Cloudflare — a browser opens, sign in, click Authorize. The account must show the Account ID above:',
+                cmds: ['npx wrangler login\nnpx wrangler whoami']
+              },
+              {
+                text: 'Optional — run it locally to try changes (an empty test database on your computer):',
+                cmds: [
+                  'copy server\\.dev.vars.example server\\.dev.vars    # then fill it in\nnpm run gen:key                                    # paste into ENCRYPTION_KEY in server\\.dev.vars\nnpm run db:migrate:local\nnpm run db:seed\nnpm run dev                                        # http://localhost:5173'
+                ]
+              },
+              {
+                text: 'Ship a change: commit and push. GitHub tests and deploys the API; Netlify rebuilds the app.',
+                cmds: ['git add -A\ngit commit -m "What changed"\ngit push']
+              },
+              {
+                text: 'Or deploy the API from this computer (database changes + API):',
+                cmds: ['npm run deploy:prod']
+              },
+              {
+                text: (
+                  <>
+                    Check: <b>Live status</b> above shows the new version, and the health page answers{' '}
+                    {code('"ok":true')}.
+                  </>
+                )
+              }
+            ]}
+          />
+          <p className="text-[13px] text-muted-foreground">
+            Building a completely new copy (new accounts, new database): follow docs/DEPLOY.md in the
+            repository.
           </p>
         </Section>
 
@@ -296,29 +349,25 @@ export function SystemGuidePage() {
           <Steps
             items={[
               {
-                text: 'Ship a change: commit and push to main. GitHub tests it, updates the database and API; Netlify rebuilds the app.',
-                cmds: ['git push']
+                text: 'See the API logs: Cloudflare → Workers & Pages → dsol-portal-api → Logs.'
               },
-              { text: 'Deploy the API by hand (if GitHub is down):', cmds: ['npm run deploy:prod'] },
-              { text: 'See the API logs: Cloudflare → Workers & Pages → dsol-portal-api → Logs.' },
               {
-                text: 'Backups run every Monday (GitHub → Actions → Backup, kept 90 days). Download one a month. Restore:',
+                text: 'See the database: Cloudflare → Storage & Databases → D1 → dsol-portal-prod (Console tab runs SQL).'
+              },
+              {
+                text: 'Backups run every Monday: GitHub → Actions → Backup (kept 90 days; download one a month). Restore a copy on your computer to check it:',
                 cmds: [
-                  'npm run restore -- --local --file <backup>.sql.age --identity <key file> --counts <counts>.json'
+                  'npm run restore -- --local --file <backup>.sql.age --identity <backup key file> --counts <counts>.json'
                 ]
               },
               {
-                text: 'Undo a mistake from the last 7 days (D1 Time Travel):',
+                text: 'Undo a mistake from the last 7 days (D1 Time Travel — tell the team first):',
                 cmds: [
                   'cd server\nnpx wrangler d1 time-travel restore DB --env production --timestamp "2026-10-19T08:00:00Z"'
                 ]
               },
               {
-                text: 'Someone forgot their password: they use "Forgot password?", or Team & Permissions → ⋯ → Email a password link.'
-              },
-              {
-                text: 'All Admins locked out: create a fresh set-password link from a terminal:',
-                cmds: ['npm run first-run -- --env production --owner <admin email> --name "<name>"']
+                text: 'Someone forgot their password: "Forgot password?" on the sign-in page, or Team & Permissions → ⋯ → Email a password link.'
               }
             ]}
           />
@@ -327,21 +376,16 @@ export function SystemGuidePage() {
         <Section
           step={6}
           title="Handing over to a new admin"
-          description="What to pass on, and what to change."
+          description="What to give them, and what to change when someone leaves."
         >
           <Steps
             items={[
+              { text: 'Give them access — step 1 of “Work on it from a new computer”.' },
               {
-                text: 'Invite them (Team & Permissions → Invite user, role Admin). Keep at least one other Admin.'
+                text: 'Give them the values that exist only with the current admin: the ENCRYPTION_KEY and the backup key file (see “Keys and where to find them”).'
               },
               {
-                text: 'Give access: GitHub repository, Cloudflare account (Manage Account → Members), Netlify team, Brevo account.'
-              },
-              {
-                text: 'Hand over the password-manager entries: ENCRYPTION_KEY, Brevo key, backup private key.'
-              },
-              {
-                text: 'When the previous admin leaves: deactivate them, remove their dashboard access, and create a new Brevo key and Cloudflare API token.'
+                text: 'When an admin leaves: Team & Permissions → ⋯ → Deactivate; remove them from GitHub, Cloudflare, Netlify and Brevo; create a new Brevo key and a new Cloudflare API token.'
               }
             ]}
           />
