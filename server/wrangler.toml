@@ -78,11 +78,11 @@ workers_dev = true
 [env.production.vars]
 ENVIRONMENT = "production"
 # The Netlify site's address (DEPLOY.md step 8), e.g. "https://dsol-portal.netlify.app"
-APP_URL = "https://REPLACE.netlify.app"
+APP_URL = "https://dsolutions-business-portal.netlify.app"
 # Optional: only if Cloudflare Access sits in front. Empty = portal passwords only.
 ACCESS_TEAM_DOMAIN = ""   # e.g. "your-team.cloudflareaccess.com"
 ACCESS_AUD = ""           # the production Access application's AUD tag
-EMAIL_FROM_ADDRESS = "no-reply@example.com"                    # REPLACE
+EMAIL_FROM_ADDRESS = "dsolutionshub@gmail.com"   # verified sender in Brevo
 EMAIL_FROM_NAME = "D Solutions"
 CORS_ORIGINS = ""
 # Workers FREE plan: 10 ms CPU per request, so sign-in hashing uses 20,000 rounds (~4 ms).

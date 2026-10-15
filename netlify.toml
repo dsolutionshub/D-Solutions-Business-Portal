@@ -17,7 +17,7 @@
 #    (docs/DEPLOY.md step 9 prints it, e.g. https://dsol-portal-api.<your-subdomain>.workers.dev).
 [[redirects]]
   from = "/api/*"
-  to = "https://dsol-portal-api.REPLACE.workers.dev/api/:splat"
+  to = "https://dsol-portal-api.nkarthi-nanjundeswaran.workers.dev/api/:splat"
   status = 200
   force = true
 
