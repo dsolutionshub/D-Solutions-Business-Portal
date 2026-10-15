@@ -30,3 +30,17 @@ export interface EmailQuota {
   /** "Logged (dev)" mode: no Brevo key in local development */
   devMode: boolean;
 }
+
+/** GET /api/admin/system — the System guide's live facts (no secret values, only set / not set). */
+export interface SystemInfo {
+  environment: string;
+  version: string;
+  appUrl: string | null;
+  apiUrl: string;
+  emailFrom: string;
+  secrets: { encryptionKey: boolean; previousEncryptionKey: boolean; brevoApiKey: boolean };
+  passwordHashRounds: number;
+  accessEnabled: boolean;
+  database: { tables: number; activeUsers: number };
+  dailyJob: 'ok' | 'stale' | 'failing' | 'never';
+}

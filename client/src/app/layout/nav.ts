@@ -1,6 +1,7 @@
 import {
   BarChart3,
   Bell,
+  BookOpen,
   Briefcase,
   CreditCard,
   FilePlus2,
@@ -65,7 +66,8 @@ export const NAV: NavGroup[] = [
     title: 'Admin',
     items: [
       { to: '/team', label: 'Team & Permissions', icon: ShieldCheck, permission: 'team.read' },
-      { to: '/settings', label: 'Settings', icon: Settings, permission: 'settings.read' }
+      { to: '/settings', label: 'Settings', icon: Settings, permission: 'settings.read' },
+      { to: '/system', label: 'System guide', icon: BookOpen, permission: 'team.manage' }
     ]
   }
 ];

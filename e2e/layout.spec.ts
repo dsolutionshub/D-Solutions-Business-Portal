@@ -34,7 +34,8 @@ test.beforeAll(async ({ request }) => {
     '/team',
     '/team?tab=roles',
     '/settings',
-    '/settings?tab=lists'
+    '/settings?tab=lists',
+    '/system'
   ];
 });
 

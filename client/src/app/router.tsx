@@ -132,6 +132,11 @@ const page = {
     () => import('@/features/settings/pages/SettingsPage'),
     m => m.SettingsPage,
     'tabs'
+  ),
+  system: lazyPage(
+    () => import('@/features/system/pages/SystemGuidePage'),
+    m => m.SystemGuidePage,
+    'form'
   )
 };
 
@@ -234,6 +239,12 @@ const screens: RouteObject[] = [
   },
   { path: 'team', element: page.team, handle: crumb('Team & Permissions') },
   { path: 'settings', element: page.settings, handle: crumb('Settings') },
+  {
+    // Admins only (team.manage can't be given to custom roles)
+    path: 'system',
+    element: <RequirePermission permission="team.manage">{page.system}</RequirePermission>,
+    handle: crumb('System guide')
+  },
   { path: '*', element: <NotFoundPage />, handle: crumb('Not found') }
 ];
 

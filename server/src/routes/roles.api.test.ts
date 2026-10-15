@@ -108,3 +108,19 @@ describe('roles', () => {
     expect(ok.json.role).toBe('Admin');
   });
 });
+
+describe('system guide', () => {
+  it('is for Admins only and reports secrets as set / not set, never their values', async () => {
+    expect((await h.call('admin', 'GET', '/admin/system')).status).toBe(403); // Manager role
+    expect((await h.call('dev', 'GET', '/admin/system')).status).toBe(403);
+    const r = await h.call('owner', 'GET', '/admin/system');
+    expect(r.status).toBe(200);
+    expect(r.json).toMatchObject({
+      secrets: { encryptionKey: true },
+      database: { activeUsers: expect.any(Number) }
+    });
+    expect(r.json.database.tables).toBeGreaterThan(20);
+    for (const value of [h.env.ENCRYPTION_KEY, h.env.BREVO_API_KEY].filter(Boolean))
+      expect(r.text).not.toContain(value);
+  });
+});
