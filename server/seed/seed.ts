@@ -163,6 +163,7 @@ const clearOrder: SQLiteTable[] = [
   t.projectSheet,
   t.projects,
   t.contacts,
+  t.clientLogos,
   t.clients,
   t.emailTemplates,
   t.lists,

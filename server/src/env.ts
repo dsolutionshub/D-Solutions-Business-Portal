@@ -4,7 +4,6 @@ import type { Db } from './db/client';
 /** Worker bindings: wrangler.toml [vars] (per environment) + D1/R2 bindings + secrets. */
 export interface Env {
   DB: D1Database;
-  FILES: R2Bucket;
   /** development = `wrangler dev` on your machine; staging / production = deployed behind Cloudflare Access */
   ENVIRONMENT: 'development' | 'staging' | 'production';
   EMAIL_FROM_ADDRESS: string;

@@ -131,12 +131,26 @@ export const passwordResets = sqliteTable(
 
 /* ----------------------------------------------------------------- clients */
 
+/**
+ * Client logos (PNG, JPG, WebP or SVG, at most 1 MB), base64 in the database — no separate file
+ * storage needed. One row per client; deleted with the client.
+ */
+export const clientLogos = sqliteTable('client_logos', {
+  clientId: text('client_id')
+    .primaryKey()
+    .references(() => clients.id, { onDelete: 'cascade' }),
+  contentType: text('content_type').notNull(),
+  data: text('data').notNull(),
+  updatedAt: text('updated_at').notNull().default(nowSql).$onUpdateFn(nowIso)
+});
+
 export const clients = sqliteTable(
   'clients',
   {
     id: text('id').primaryKey(),
     name: text('name').notNull(),
     color: text('color').notNull(),
+    /** Version of the uploaded logo (its bytes are in client_logos); null = no logo. */
     logoKey: text('logo_key'),
     type: text('type'),
     industry: text('industry'),

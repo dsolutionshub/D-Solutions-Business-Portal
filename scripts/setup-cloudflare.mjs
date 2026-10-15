@@ -1,11 +1,11 @@
-// Create the Cloudflare resources an environment needs, if they don't exist yet, and print what to
+// Create the Cloudflare D1 database an environment needs, if it doesn't exist yet, and print what to
 // paste into server/wrangler.toml. Safe to run again.
 //
 //   npm run setup:staging      (= node scripts/setup-cloudflare.mjs --env staging)
 //   npm run setup:prod         (= node scripts/setup-cloudflare.mjs --env production)
 //
 // Needs `npx wrangler login` first (or CLOUDFLARE_API_TOKEN + CLOUDFLARE_ACCOUNT_ID).
-import { BACKUP_BUCKET, envArg, RESOURCES, wrangler } from './lib.mjs';
+import { envArg, RESOURCES, wrangler } from './lib.mjs';
 
 const env = envArg();
 const r = RESOURCES[env];
@@ -21,16 +21,7 @@ else {
   console.log(`✔ D1 database ${r.d1} created`);
 }
 
-// R2 (files, and — once — the backup bucket)
-const buckets = wrangler(['r2', 'bucket', 'list'], { capture: true });
-for (const bucket of [r.r2, ...(env === 'production' ? [BACKUP_BUCKET] : [])]) {
-  if (buckets.includes(bucket)) console.log(`✔ R2 bucket ${bucket} exists`);
-  else {
-    wrangler(['r2', 'bucket', 'create', bucket]);
-    console.log(`✔ R2 bucket ${bucket} created`);
-  }
-}
-
+// (no R2: client logos are stored in D1; backups are kept as GitHub artifacts)
 // (the app is hosted on Netlify, so no Cloudflare Pages project is created)
 
 console.log(`

@@ -2,12 +2,12 @@
 
 The first deployment, step by step. Do the steps **in order**.
 
-| Part     | Runs on               | What                                                    |
-| -------- | --------------------- | ------------------------------------------------------- |
-| Database | Cloudflare **D1**     | `dsol-portal-prod` (+ R2 buckets for logos and backups) |
-| Backend  | Cloudflare **Worker** | the API, `dsol-portal-api.<you>.workers.dev`            |
-| Frontend | **Netlify**           | the app, `https://<site-name>.netlify.app`              |
-| Email    | **Brevo**             | invites, password resets, invoices, reminders           |
+| Part     | Runs on               | What                                                  |
+| -------- | --------------------- | ----------------------------------------------------- |
+| Database | Cloudflare **D1**     | `dsol-portal-prod` (all data, including client logos) |
+| Backend  | Cloudflare **Worker** | the API, `dsol-portal-api.<you>.workers.dev`          |
+| Frontend | **Netlify**           | the app, `https://<site-name>.netlify.app`            |
+| Email    | **Brevo**             | invites, password resets, invoices, reminders         |
 
 Netlify forwards every `/api/*` request to the Worker (`netlify.toml`), so people only ever open the
 Netlify address. Sign-in cookies, invoice links in emails and the health check all go through it.
@@ -26,9 +26,10 @@ Time: about an hour. Cost: ₹0 (all free plans).
 
 1. 🖱️ **Cloudflare account.** Sign up at <https://dash.cloudflare.com>. Turn on two-factor
    authentication: profile icon → _My Profile_ → _Authentication_.
-2. 🖱️ **Your workers.dev subdomain.** Left menu → _Workers & Pages_. The first time, Cloudflare asks
-   you to pick a subdomain (e.g. `dsolutions`). Your API will live at
-   `https://dsol-portal-api.<subdomain>.workers.dev`. Note the subdomain.
+2. **Your workers.dev subdomain: nothing to do now.** New accounts may not have one yet. When you
+   deploy the API (step 12), Cloudflare assigns one or the command asks you to pick it, and prints
+   the API address `https://dsol-portal-api.<subdomain>.workers.dev`. (Once it exists, it shows under
+   _Compute (Workers) → Workers & Pages_ → _Account details_ → **Subdomain** on the right.)
 3. ⌨️ **Log in from your computer:**
    ```bash
    npx wrangler login      # a browser opens: allow access
@@ -38,17 +39,14 @@ Time: about an hour. Cost: ₹0 (all free plans).
    allows 10 ms of CPU per request, so `server/wrangler.toml` sets `PBKDF2_ITERATIONS = "20000"`
    (about 4 ms). If you move to Workers Paid (US$5/month) later, delete that line: passwords are
    re-hashed with 100,000 rounds at each person's next sign-in.
-   - R2 (client logos and backups) needs a payment card on file to switch on (_R2 Object Storage →
-     Enable_). Nothing is charged within the free 10 GB.
-5. ⌨️ **Create the database and storage:**
+   - No card is needed: the portal doesn't use R2. Client logos are stored in the database and
+     backups are kept by GitHub.
+5. ⌨️ **Create the database** (done ✔ — `dsol-portal-prod`, its id is already in `wrangler.toml`):
    ```bash
    npm run setup:prod
    ```
-   This creates the D1 database `dsol-portal-prod`, the R2 bucket `dsol-portal-files-prod` (client
-   logos) and the private R2 bucket `dsol-portal-backups`, and prints a `database_id`. Paste it into
+   This creates the D1 database `dsol-portal-prod` and prints a `database_id` to paste into
    `server/wrangler.toml` under `[[env.production.d1_databases]]` → `database_id`.
-   > If R2 asks you to enable it first: _R2 Object Storage_ in the dashboard → _Purchase / Enable_
-   > (the free tier needs a card on file but costs nothing within 10 GB). Then run the command again.
 
 ## Part B — Netlify: reserve the app's address
 
@@ -110,12 +108,11 @@ Time: about an hour. Cost: ₹0 (all free plans).
     Create Token → Create Custom Token_:
     - Name: `GitHub deploy (portal)`.
     - Permissions, all **Account** scope:
-      | Permission         | Access |
-      | ------------------ | ------ |
-      | Workers Scripts    | Edit   |
-      | D1                 | Edit   |
-      | Workers R2 Storage | Edit   |
-      | Account Settings   | Read   |
+      | Permission       | Access |
+      | ---------------- | ------ |
+      | Workers Scripts  | Edit   |
+      | D1               | Edit   |
+      | Account Settings | Read   |
     - Account resources: _Include → your account_. Create, and copy the token (shown once).
 15. 🖱️ **GitHub repository settings** (`github.com/dsolutionshub/D-Solutions-Business-Portal`):
     - _Settings → Environments → New environment_ → **`production`**. Optionally add yourself as

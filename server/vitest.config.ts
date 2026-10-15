@@ -2,7 +2,7 @@ import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
   test: {
-    // API tests start a local D1/R2 (workerd) per file.
+    // API tests start a local D1 (workerd) per file.
     testTimeout: 30_000,
     hookTimeout: 60_000,
     coverage: {

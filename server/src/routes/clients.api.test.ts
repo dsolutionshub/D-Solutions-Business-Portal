@@ -166,7 +166,7 @@ describe('clients', () => {
     });
   });
 
-  describe('logo (R2)', () => {
+  describe('logo', () => {
     it('uploads, serves with a safe CSP, and rejects big files', async () => {
       const png = new Uint8Array([0x89, 0x50, 0x4e, 0x47, 1, 2, 3]);
       const form = new FormData();

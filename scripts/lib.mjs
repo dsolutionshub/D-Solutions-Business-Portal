@@ -62,18 +62,15 @@ export const argValue = (name, argv = process.argv.slice(2)) => {
 export const RESOURCES = {
   staging: {
     d1: 'dsol-portal-staging',
-    r2: 'dsol-portal-files-staging',
     pages: 'dsol-portal-staging',
     pagesBranch: 'staging'
   },
   production: {
     d1: 'dsol-portal-prod',
-    r2: 'dsol-portal-files-prod',
     pages: 'dsol-portal',
     pagesBranch: 'main'
   }
 };
-export const BACKUP_BUCKET = 'dsol-portal-backups';
 
 /** SQL string literal. */
 export const sqlStr = s => `'${String(s).replace(/'/g, "''")}'`;

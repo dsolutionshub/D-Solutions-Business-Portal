@@ -28,9 +28,6 @@ database_name = "dsol-portal"
 database_id = "00000000-0000-0000-0000-000000000000" # local dev ignores it
 migrations_dir = "migrations"
 
-[[r2_buckets]]
-binding = "FILES"
-bucket_name = "dsol-portal-files"
 
 [triggers]
 # 02:30 UTC = 08:00 IST — daily reminder digests, client overdue reminders, scheduled emails.
@@ -64,9 +61,6 @@ database_name = "dsol-portal-staging"
 database_id = "REPLACE-with-staging-database-id"
 migrations_dir = "migrations"
 
-[[env.staging.r2_buckets]]
-binding = "FILES"
-bucket_name = "dsol-portal-files-staging"
 
 [env.staging.triggers]
 crons = ["30 2 * * *", "*/15 * * * *"]
@@ -98,12 +92,9 @@ PBKDF2_ITERATIONS = "20000"
 [[env.production.d1_databases]]
 binding = "DB"
 database_name = "dsol-portal-prod"
-database_id = "REPLACE-with-production-database-id"
+database_id = "ac56387a-763f-4872-9d67-d387b8d1af89"
 migrations_dir = "migrations"
 
-[[env.production.r2_buckets]]
-binding = "FILES"
-bucket_name = "dsol-portal-files-prod"
 
 [env.production.triggers]
 crons = ["30 2 * * *", "*/15 * * * *"]

@@ -269,9 +269,8 @@ export async function restoreClient(db: Db, id: string, userId: string): Promise
  * Permanent delete of an ARCHIVED client with everything that belongs to it: projects (sheets,
  * secrets, keys, costs), releases, delivered work, renewal history, emails and contacts.
  * Refused while the client has invoices: those are financial records and are kept.
- * Returns the logo key so the caller can remove the file.
  */
-export async function deleteClient(db: Db, id: string, userId: string): Promise<string | null> {
+export async function deleteClient(db: Db, id: string, userId: string): Promise<void> {
   const client = await getClientRow(db, id);
   if (!client.archivedAt)
     throw new HttpError(
@@ -304,7 +303,6 @@ export async function deleteClient(db: Db, id: string, userId: string): Promise<
       meta: { name: client.name }
     })
   ]);
-  return client.logoKey;
 }
 
 export async function setClientLogo(db: Db, id: string, logoKey: string | null) {

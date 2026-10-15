@@ -10,7 +10,7 @@ Two layers protect the data:
 | What                                       | How far back                                       | When to use it                                                              |
 | ------------------------------------------ | -------------------------------------------------- | --------------------------------------------------------------------------- |
 | **D1 Time Travel** (built into Cloudflare) | any minute, last 7 days (free plan)                | "Undo" a mistake in production: a bad import, wrong deletion, broken deploy |
-| **Weekly encrypted export** (`backup.yml`) | 90 days (GitHub) and as long as you keep them (R2) | Disaster recovery, or copying production into staging                       |
+| **Weekly encrypted export** (`backup.yml`) | 90 days (GitHub); download the ones to keep longer | Disaster recovery                                                           |
 
 ### Weekly export
 
@@ -21,8 +21,9 @@ _Actions → Backup → Run workflow_. It:
 2. writes `counts-<time>.json`, the number of rows in each table;
 3. encrypts the export with [age](https://age-encryption.org) for the public key in
    `backup/age-recipient.txt`, then overwrites and deletes the plaintext;
-4. uploads `d1-production-<time>.sql.age` and the counts file as a workflow artifact (kept 90 days)
-   **and** to the private R2 bucket `dsol-portal-backups/d1/`.
+4. uploads `d1-production-<time>.sql.age` and the counts file as a workflow artifact, kept 90 days.
+   GitHub deletes older ones, so **download one a month** (e.g. the first Monday's) and keep it with
+   your company files. It is encrypted, so it is safe to store anywhere.
 
 An unencrypted export is never uploaded. If `backup/age-recipient.txt` doesn't hold a real public
 key, the workflow fails on purpose.
@@ -34,8 +35,7 @@ still need them.
 
 Download a backup:
 
-- **GitHub:** _Actions → Backup → the run → Artifacts_.
-- **R2:** `cd server && npx wrangler r2 object get dsol-portal-backups/d1/<file> --file <file> --remote`.
+- **GitHub:** _Actions → Backup → the run → Artifacts_ (last 90 days).
 
 ### Time Travel (production "undo")
 
@@ -153,21 +153,20 @@ What to do when the health check or the Admins' email fires:
 
 ## Free-tier limits to watch
 
-| Service           | Free limit (at the time of writing)            | Our typical use                                      | If exceeded                                                                                                 |
-| ----------------- | ---------------------------------------------- | ---------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| Workers requests  | 100,000 / day                                  | a few thousand (staff × pages × ~5 calls)            | requests fail with 429 until midnight UTC → upgrade to Workers Paid (US$5/month)                            |
-| Workers CPU       | 10 ms per request                              | ~1–5 ms (D1 wait time doesn't count)                 | "Exceeded CPU" errors in logs (most likely on Reports or the daily job) → Workers Paid                      |
-| CPU at sign-in    | 10 ms per request (free)                       | ~20 ms per sign-in (password hashing)                | sign-ins fail with "exceeded CPU" → Workers Paid, or lower `PBKDF2_ITERATIONS` (DEPLOY step 4)              |
-| Cron Triggers     | 5 per account                                  | 2 (production)                                       | don't add more                                                                                              |
-| D1 reads          | 5 million rows / day                           | well under 100k                                      | queries fail until midnight UTC → Workers Paid raises it 5×+                                                |
-| D1 writes         | 100,000 rows / day                             | a few hundred                                        | as above                                                                                                    |
-| D1 storage        | 5 GB (500 MB per database)                     | a few MB                                             | archive old emails/audit rows, or Workers Paid                                                              |
-| D1 Time Travel    | 7 days                                         | —                                                    | weekly encrypted exports cover older points                                                                 |
-| R2                | 10 GB storage, 1M writes and 10M reads / month | logos + backups (MBs)                                | delete old backups from `dsol-portal-backups` (keep ≥ 8 weekly)                                             |
-| Netlify (the app) | 100 GB bandwidth, 300 build minutes / month    | small (one ~600 kB app; ~2 min per build)            | builds pause until next month → fewer pushes, or Netlify Pro                                                |
-| Cloudflare Access | 50 users                                       | the team                                             | Zero Trust paid plan                                                                                        |
-| Brevo             | 300 emails / day (counted per recipient)       | digests + client emails                              | the portal stops sending at the limit you set (Settings) and warns from 80%; raise it after upgrading Brevo |
-| GitHub Actions    | 2,000 minutes / month (private repo)           | ~10 min per deploy, ~1 min per backup / health check | fewer pushes, or make the repository public (not recommended)                                               |
+| Service           | Free limit (at the time of writing)         | Our typical use                                      | If exceeded                                                                                                 |
+| ----------------- | ------------------------------------------- | ---------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| Workers requests  | 100,000 / day                               | a few thousand (staff × pages × ~5 calls)            | requests fail with 429 until midnight UTC → upgrade to Workers Paid (US$5/month)                            |
+| Workers CPU       | 10 ms per request                           | ~1–5 ms (D1 wait time doesn't count)                 | "Exceeded CPU" errors in logs (most likely on Reports or the daily job) → Workers Paid                      |
+| CPU at sign-in    | 10 ms per request (free)                    | ~20 ms per sign-in (password hashing)                | sign-ins fail with "exceeded CPU" → Workers Paid, or lower `PBKDF2_ITERATIONS` (DEPLOY step 4)              |
+| Cron Triggers     | 5 per account                               | 2 (production)                                       | don't add more                                                                                              |
+| D1 reads          | 5 million rows / day                        | well under 100k                                      | queries fail until midnight UTC → Workers Paid raises it 5×+                                                |
+| D1 writes         | 100,000 rows / day                          | a few hundred                                        | as above                                                                                                    |
+| D1 storage        | 5 GB (500 MB per database)                  | a few MB                                             | archive old emails/audit rows, or Workers Paid                                                              |
+| D1 Time Travel    | 7 days                                      | —                                                    | weekly encrypted exports cover older points                                                                 |
+| Netlify (the app) | 100 GB bandwidth, 300 build minutes / month | small (one ~600 kB app; ~2 min per build)            | builds pause until next month → fewer pushes, or Netlify Pro                                                |
+| Cloudflare Access | 50 users                                    | the team                                             | Zero Trust paid plan                                                                                        |
+| Brevo             | 300 emails / day (counted per recipient)    | digests + client emails                              | the portal stops sending at the limit you set (Settings) and warns from 80%; raise it after upgrading Brevo |
+| GitHub Actions    | 2,000 minutes / month (private repo)        | ~10 min per deploy, ~1 min per backup / health check | fewer pushes, or make the repository public (not recommended)                                               |
 
 Check actual usage in the Cloudflare dashboard: _Workers & Pages → Overview_, _D1 → the database
-→ Metrics_, _R2 → Overview_. Limits change; confirm them on Cloudflare's and Brevo's pricing pages.
+→ Metrics_. Limits change; confirm them on Cloudflare's and Brevo's pricing pages.

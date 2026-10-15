@@ -19,10 +19,10 @@ permissions they pick (Team & Permissions → Role permissions).
 | Part     | Stack                                                                                                              |
 | -------- | ------------------------------------------------------------------------------------------------------------------ |
 | `client` | React 18, Vite, TypeScript, Tailwind CSS 3, shadcn/ui, React Router 7, TanStack Query, RHF + Zod, Recharts, TipTap |
-| `server` | Cloudflare Workers, Hono, Drizzle ORM, D1 (SQLite), R2, Cron Triggers, Brevo                                       |
+| `server` | Cloudflare Workers, Hono, Drizzle ORM, D1 (SQLite), Cron Triggers, Brevo                                           |
 | `shared` | Zod schemas, types, constants, the permission map and pure business rules used by both                             |
 
-Everything runs on free tiers: Cloudflare Workers, D1 and R2 (API and data), Netlify (the app) and Brevo (300 emails a day).
+Everything runs on free tiers: Cloudflare Workers and D1 (API and data), Netlify (the app) and Brevo (300 emails a day).
 
 - Deploying: **[docs/DEPLOY.md](docs/DEPLOY.md)**.
 - Running it (backups, restore, key rotation, limits): **[docs/OPERATIONS.md](docs/OPERATIONS.md)**.
@@ -31,7 +31,7 @@ Everything runs on free tiers: Cloudflare Workers, D1 and R2 (API and data), Net
 ## Run it locally
 
 Requirements: Node 22 (20.19+ works) and npm 10+. You don't need a Cloudflare account, because
-`wrangler dev` simulates D1, R2 and cron on your machine.
+`wrangler dev` simulates D1 and cron on your machine.
 
 ```bash
 npm install
@@ -81,7 +81,7 @@ CI runs all of these on every pull request (`.github/workflows/ci.yml`).
 | `npm run db:generate`                                               | New SQL migration from `server/src/db/schema.ts`                        |
 | `npm run db:migrate:local` / `:staging` / `:prod`                   | Apply migrations                                                        |
 | `npm run db:seed`                                                   | Wipe the **local** database back to real starting data (you as Admin)   |
-| `npm run setup:staging` / `setup:prod`                              | Create the Cloudflare D1 / R2 resources if missing (docs/DEPLOY.md)     |
+| `npm run setup:staging` / `setup:prod`                              | Create the Cloudflare D1 database if missing (docs/DEPLOY.md)           |
 | `npm run first-run -- --env production --owner … --name …`          | Empty production: settings, dropdown lists, first Admin                 |
 | `npm run deploy:staging` / `deploy:prod`                            | Migrate → Worker (CI does this on push; Netlify builds the app)         |
 | `npm run backup -- --env production`                                | Encrypted export (CI does this weekly)                                  |

@@ -1,6 +1,6 @@
 /// <reference types="vite/client" />
 /**
- * API test harness: the real Hono app against a local D1 + R2 (the same simulator `wrangler dev`
+ * API test harness: the real Hono app against a local D1 (the same simulator `wrangler dev`
  * uses), in memory, with the real migrations applied. One user per role, plus a stranger.
  *
  *   const h = await createHarness();

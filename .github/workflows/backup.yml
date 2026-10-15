@@ -1,6 +1,6 @@
 # Weekly (Monday 02:00 IST) and on demand: export the production D1 database, encrypt it with age
 # for the public key in backup/age-recipient.txt, and keep it for 90 days as a workflow artifact
-# and in the private R2 bucket. An unencrypted export is never uploaded (scripts/backup.mjs).
+# (download older ones you want to keep). An unencrypted export is never uploaded (scripts/backup.mjs).
 # Restore: docs/OPERATIONS.md → Restore.
 name: Backup
 
@@ -40,9 +40,3 @@ jobs:
           path: out/
           retention-days: 90
           if-no-files-found: error
-      - name: Copy to the private R2 bucket
-        working-directory: server
-        run: |
-          for f in ../out/*; do
-            npx wrangler r2 object put "dsol-portal-backups/d1/$(basename "$f")" --file "$f" --remote
-          done

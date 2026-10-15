@@ -22,7 +22,7 @@ import {
 import { projectsForExport } from '../db/repos/projects';
 import { csvCell, insertAudit } from '../db/repos/util';
 import { newId } from '../db/ids';
-import { contacts, invoices } from '../db/schema';
+import { clientLogos, contacts, invoices } from '../db/schema';
 import type { AppEnv } from '../env';
 import { badRequest, HttpError } from '../middleware/errors';
 import { requirePermission } from '../middleware/requireRole';
@@ -30,6 +30,14 @@ import { validate } from '../middleware/validate';
 
 const LOGO_MAX_BYTES = 1024 * 1024;
 const LOGO_TYPES = ['image/png', 'image/jpeg', 'image/webp', 'image/svg+xml'];
+
+/** Bytes ↔ base64 (logos are stored as text in D1). */
+function toBase64(bytes: Uint8Array): string {
+  let s = '';
+  for (let i = 0; i < bytes.length; i += 0x8000) s += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
+  return btoa(s);
+}
+const fromBase64 = (b64: string) => Uint8Array.from(atob(b64), ch => ch.charCodeAt(0));
 
 const router = new Hono<AppEnv>()
   .use(requirePermission('clients.read'))
@@ -94,8 +102,8 @@ const router = new Hono<AppEnv>()
   })
   /** Permanently delete an archived client that has no invoices. */
   .delete('/:id', requirePermission('clients.archive'), async c => {
-    const logoKey = await deleteClient(c.get('db'), c.req.param('id'), c.get('user')!.id);
-    if (logoKey) await c.env.FILES.delete(logoKey).catch(() => undefined);
+    // the logo goes with the client (ON DELETE CASCADE)
+    await deleteClient(c.get('db'), c.req.param('id'), c.get('user')!.id);
     return c.body(null, 204);
   })
 
@@ -170,15 +178,18 @@ const router = new Hono<AppEnv>()
   /* ----------------------------------------------------------------- logo */
 
   .get('/:id/logo', async c => {
-    const client = await getClientRow(c.get('db'), c.req.param('id'));
-    const obj = client.logoKey ? await c.env.FILES.get(client.logoKey) : null;
-    if (!obj) throw new HttpError(404, 'not_found', 'No logo.');
-    c.header('Content-Type', obj.httpMetadata?.contentType ?? 'application/octet-stream');
+    const db = c.get('db');
+    const client = await getClientRow(db, c.req.param('id'));
+    const [logo] = client.logoKey
+      ? await db.select().from(clientLogos).where(eq(clientLogos.clientId, client.id))
+      : [];
+    if (!logo) throw new HttpError(404, 'not_found', 'No logo.');
+    c.header('Content-Type', logo.contentType);
     // The URL carries a version, so it can be cached; the CSP stops scripts inside SVGs.
     c.header('Cache-Control', 'private, max-age=86400');
     c.header('Content-Security-Policy', "default-src 'none'; style-src 'unsafe-inline'; sandbox");
     c.header('X-Content-Type-Options', 'nosniff');
-    return c.body(obj.body);
+    return c.body(fromBase64(logo.data));
   })
 
   .post('/:id/logo', requirePermission('clients.write'), async c => {
@@ -196,10 +207,13 @@ const router = new Hono<AppEnv>()
       throw new HttpError(413, 'too_large', 'Logo must be smaller than 1 MB.', {
         logo: 'Logo must be smaller than 1 MB.'
       });
-    const key = `clients/${client.id}/logo-${nanoid(10)}`;
-    await c.env.FILES.put(key, await file.arrayBuffer(), { httpMetadata: { contentType: file.type } });
-    await setClientLogo(db, client.id, key);
-    if (client.logoKey) await c.env.FILES.delete(client.logoKey);
+    const row = { contentType: file.type, data: toBase64(new Uint8Array(await file.arrayBuffer())) };
+    await db
+      .insert(clientLogos)
+      .values({ clientId: client.id, ...row })
+      .onConflictDoUpdate({ target: clientLogos.clientId, set: row });
+    // a new version in the URL, so browsers fetch the new image
+    await setClientLogo(db, client.id, `v-${nanoid(10)}`);
     return c.json(await getClientView(db, client.id));
   })
 
@@ -208,7 +222,7 @@ const router = new Hono<AppEnv>()
     const client = await getClientRow(db, c.req.param('id'));
     if (client.logoKey) {
       await setClientLogo(db, client.id, null);
-      await c.env.FILES.delete(client.logoKey);
+      await db.delete(clientLogos).where(eq(clientLogos.clientId, client.id));
     }
     return c.json(await getClientView(db, client.id));
   });
