@@ -263,8 +263,9 @@ export function SystemGuidePage() {
                 what: 'Opens the weekly encrypted backups.',
                 where: (
                   <>
-                    The file made by {code('npm run backup:keygen')} on the admin’s computer (e.g.{' '}
-                    {code('D:\\safe\\dsol-backup-key.txt')}). Its public half is in the repository:{' '}
+                    On Karthi N’s computer:{' '}
+                    {code('C:\\Users\\Karthi\\Documents\\DSolutions-Portal-Keys\\dsol-backup-key.txt')} (made
+                    by {code('npm run backup:keygen')}). Its public half is in the repository:{' '}
                     {code('backup/age-recipient.txt')}.
                   </>
                 ),
