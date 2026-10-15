@@ -21,20 +21,37 @@ function inkFor(color: string): string {
 
 const inkCache = new Map<string, string>();
 
-/** Client logo, or coloured initials when there is none. */
+/**
+ * Client logo, or coloured initials when there is none. Logos are shown whole (never cropped) on a
+ * white tile, so wide wordmarks stay readable; `wide` gives them a wider box (true = 3:1, or a ratio).
+ */
 export function ClientLogo({
   name,
   color,
   logoUrl,
-  size = 32
+  size = 32,
+  wide = false
 }: {
   name: string;
   color: string;
   logoUrl?: string | null;
   size?: number;
+  wide?: boolean | number;
 }) {
   const style = { width: size, height: size, borderRadius: Math.round(size / 4) };
-  if (logoUrl) return <img src={logoUrl} alt="" style={style} className="flex-none bg-muted object-cover" />;
+  if (logoUrl)
+    return (
+      <img
+        src={logoUrl}
+        alt=""
+        style={{
+          ...style,
+          width: size * (wide === true ? 3 : wide || 1),
+          padding: Math.max(2, Math.round(size / 10))
+        }}
+        className="flex-none border bg-white object-contain"
+      />
+    );
   let ink = inkCache.get(color);
   if (!ink) inkCache.set(color, (ink = inkFor(color)));
   return (

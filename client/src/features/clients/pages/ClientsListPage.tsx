@@ -55,7 +55,7 @@ export function ClientsListPage() {
       sortable: true,
       cell: c => (
         <div className="flex items-center gap-2.5">
-          <ClientLogo name={c.name} color={c.color} logoUrl={c.logoUrl} />
+          <ClientLogo name={c.name} color={c.color} logoUrl={c.logoUrl} size={36} wide={2} />
           <div className="min-w-0">
             <Link
               to={`/clients/${c.id}`}

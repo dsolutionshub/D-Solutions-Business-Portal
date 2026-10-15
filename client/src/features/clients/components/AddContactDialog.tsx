@@ -85,9 +85,6 @@ export function AddContactDialog({
             <Input type="email" {...register('email')} />
           </Field>
           <div className="grid gap-4 sm:grid-cols-2">
-            <Field label="Role / title" error={e.role?.message}>
-              <Input placeholder="e.g. Ops Manager" {...register('role')} />
-            </Field>
             <Field label="Phone" error={e.phone?.message}>
               <Input type="tel" {...register('phone')} />
             </Field>

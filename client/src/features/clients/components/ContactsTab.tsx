@@ -28,7 +28,7 @@ export function ContactsTab({ client }: { client: ClientView }) {
       cell: p => (
         <div>
           <div className="font-semibold">{p.name}</div>
-          <div className="text-xs text-muted-foreground">{p.role ?? '—'}</div>
+          {p.role && <div className="text-xs text-muted-foreground">{p.role}</div>}
         </div>
       )
     },

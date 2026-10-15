@@ -90,7 +90,7 @@ export function ClientDetailPage() {
           <div className="flex h-12 items-center">
             <BackButton to="/clients" label="Back to clients" />
           </div>
-          <ClientLogo name={c.name} color={c.color} logoUrl={c.logoUrl} size={56} />
+          <ClientLogo name={c.name} color={c.color} logoUrl={c.logoUrl} size={56} wide />
           <div className="min-w-0 flex-[1_1_300px]">
             <div className="flex flex-wrap items-center gap-2">
               <h1 className="text-[22px] font-semibold tracking-tight">{c.name}</h1>
@@ -207,11 +207,6 @@ export function ClientDetailPage() {
         <StatCard label="Projects" value={c.counts.projects} hint={`${c.counts.activeProjects} active`} />
         <StatCard label="Contacts" value={c.counts.contacts} hint="receive releases and invoices" />
         <StatCard label="Client since" value={formatDate(c.since)} />
-        <StatCard
-          label="Payment terms"
-          value={c.paymentTerms}
-          hint={c.gstin ? `GSTIN ${c.gstin}` : 'No GSTIN on file'}
-        />
       </StatGrid>
 
       <PageTabs
