@@ -1,7 +1,6 @@
 import { formatInr, PROJECT_SORTS, PROJECT_STATUSES, type ProjectListItem } from '@dsol/shared';
 import { Briefcase, Eye, Pencil, Plus } from 'lucide-react';
 import { Link } from 'react-router';
-import { ClientLogo } from '@/components/common/ClientLogo';
 import { DataTable, type Column } from '@/components/common/DataTable';
 import { DateWithDaysLeft } from '@/components/common/DateWithDaysLeft';
 import { EmptyState } from '@/components/common/EmptyState';
@@ -67,8 +66,7 @@ export function ProjectsListPage() {
       header: 'Client',
       sortable: true,
       cell: p => (
-        <Link to={`/clients/${p.clientId}`} className="flex items-center gap-2 hover:underline">
-          <ClientLogo name={p.clientName} color={p.clientColor} logoUrl={p.clientLogoUrl} size={26} />
+        <Link to={`/clients/${p.clientId}`} className="hover:underline">
           {p.clientName}
         </Link>
       )

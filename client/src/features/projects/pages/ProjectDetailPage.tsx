@@ -64,10 +64,10 @@ export function ProjectDetailPage() {
     <>
       <Card className="p-5">
         <div className="flex flex-wrap items-start gap-4">
-          <div className="flex h-12 items-center">
+          <div className="flex h-14 items-center">
             <BackButton to="/projects" label="Back to projects" />
           </div>
-          <ClientLogo name={v.client.name} color={v.client.color} logoUrl={v.client.logoUrl} size={48} />
+          <ClientLogo name={v.client.name} color={v.client.color} logoUrl={v.client.logoUrl} size={56} wide />
           <div className="min-w-0 flex-[1_1_320px]">
             <div className="flex flex-wrap items-center gap-2">
               <h1 className="text-[22px] font-semibold tracking-tight">{p.name}</h1>

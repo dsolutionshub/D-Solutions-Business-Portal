@@ -87,7 +87,7 @@ export function ClientDetailPage() {
     <>
       <Card className="p-5">
         <div className="flex flex-wrap items-start gap-4">
-          <div className="flex h-12 items-center">
+          <div className="flex h-14 items-center">
             <BackButton to="/clients" label="Back to clients" />
           </div>
           <ClientLogo name={c.name} color={c.color} logoUrl={c.logoUrl} size={56} wide />
