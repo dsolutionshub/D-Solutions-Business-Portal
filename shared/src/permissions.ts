@@ -81,8 +81,7 @@ export const PERMISSION_GROUPS: { title: string; items: { key: Permission; label
       { key: 'projects.read', label: 'View projects (cost amounts and due dates)' },
       { key: 'projects.sheet', label: 'View project sheets: URLs, domain, hosting, database, keys' },
       { key: 'projects.write', label: 'Add and edit projects, set secrets' },
-      { key: 'secrets.reveal', label: 'Reveal passwords and secret keys' },
-      { key: 'renewals.write', label: 'Renew domains, SSL, hosting and subscriptions' }
+      { key: 'secrets.reveal', label: 'Reveal passwords and secret keys' }
     ]
   },
   {

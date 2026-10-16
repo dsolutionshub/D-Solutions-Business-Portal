@@ -169,7 +169,7 @@ test('3. void an unpaid invoice → work back to To bill; duplicating doesn’t 
   expect(await workStatus(page, `Wishlist ${stamp}`)).toBe('Paid');
 });
 
-test('4. domain due in 5 days → alert → renew → alert gone', async ({ page }) => {
+test('4. domain due in 5 days → alert → new expiry date → alert gone', async ({ page }) => {
   const title = `${DOMAIN} expires in 5 days`;
   await page.goto('/notifications');
   await expect(page.getByText(title)).toBeVisible();
@@ -181,16 +181,12 @@ test('4. domain due in 5 days → alert → renew → alert gone', async ({ page
   await expect(page.getByRole('menu').getByRole('menuitem')).toHaveCount(5 + 1); // 5 alerts + "View all"
   await page.keyboard.press('Escape');
 
-  await page.goto(`/projects/${projectId}`);
-  await page
-    .getByRole('row', { name: new RegExp(DOMAIN.replace(/\./g, '\\.')) })
-    .getByRole('button', { name: 'Renew' })
-    .click();
-  const dialog = page.getByRole('dialog', { name: /Renew/ });
-  await dialog.getByLabel('Order / receipt no.').fill(`GD-${stamp}`);
-  await dialog.getByRole('button', { name: 'Mark as renewed' }).click();
-  await expect(page.getByText(/renewed — new date/)).toBeVisible();
-  await expect(page.getByText(`GD-${stamp}`)).toBeVisible(); // history row
+  // renewing = moving the expiry date forward on the project
+  await page.goto(`/projects/${projectId}/edit`);
+  await openSection(page, 'Domain & SSL');
+  await page.getByLabel('Domain expiry date').fill(addDays(today, 370));
+  await page.getByRole('button', { name: 'Save changes' }).click();
+  await expect(page).toHaveURL(new RegExp(`/projects/${projectId}$`));
 
   await page.goto('/notifications');
   await expect(page.getByRole('heading', { name: 'Notifications' })).toBeVisible();

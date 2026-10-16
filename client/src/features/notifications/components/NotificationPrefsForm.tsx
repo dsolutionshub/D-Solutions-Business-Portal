@@ -50,9 +50,9 @@ export function NotificationPrefsForm() {
   return (
     <div className="p-5">
       <p className="mb-4 max-w-3xl text-sm text-muted-foreground">
-        An alert appears when a date is inside the largest interval you pick (and stays until it is renewed or
-        paid). Untick every interval to turn a type off. The daily email digest goes out at 8:00 AM and lists
-        the items whose reminder day is today.
+        An alert appears when a date is inside the largest interval you pick (and stays until its date is
+        moved forward on the project, or the invoice is paid). Untick every interval to turn a type off. The
+        daily email digest goes out at 8:00 AM and lists the items whose reminder day is today.
       </p>
       {!canEdit && (
         <p className="mb-4 rounded-lg bg-muted px-3 py-2 text-xs text-muted-foreground">

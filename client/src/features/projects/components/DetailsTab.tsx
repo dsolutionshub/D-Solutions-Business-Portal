@@ -16,7 +16,6 @@ import { SecretField } from '@/components/common/SecretField';
 import { StatusBadge } from '@/components/common/StatusBadge';
 import { Tile } from '@/components/common/Tile';
 import { UrlLink } from '@/components/common/UrlLink';
-import { RenewalsPanel } from './RenewalsPanel';
 import { useCan } from '@/lib/auth';
 import { cn } from '@/lib/utils';
 import { revealer } from '../hooks/useProjects';
@@ -76,7 +75,7 @@ function Row({ label, children }: { label: ReactNode; children: ReactNode }) {
   );
 }
 
-/** The project sheet: summary tiles, one card per section, secrets via reveal, running cost, notes. */
+/** The project sheet: summary tiles, running cost first, then one card per section (secrets via reveal) and notes. */
 export function DetailsTab({ view: v }: { view: ProjectView }) {
   const canReveal = useCan('secrets.reveal');
   const reveal = revealer(v.project.id);
@@ -143,9 +142,29 @@ export function DetailsTab({ view: v }: { view: ProjectView }) {
         )}
       </div>
 
-      <RenewalsPanel projectId={p.id} clientName={v.client.name} archived={!!p.archivedAt} />
-
       <div className="grid items-start gap-4 [grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr))]">
+        <SheetCard title="Running cost">
+          {costRows.map(([label, amount, cycle]) => (
+            <Row key={label} label={label}>
+              <span className="flex flex-wrap justify-between gap-2">
+                <span>
+                  {formatInr(amount)} / {monthly(cycle)}
+                </span>
+                <span className="text-xs text-muted-foreground">
+                  {formatInr(amount * (cycle === 'Monthly' ? 12 : 1))} / yr
+                </span>
+              </span>
+            </Row>
+          ))}
+          <Row label={<span className="font-semibold text-foreground">Total per year</span>}>
+            <span className="text-[15px] font-semibold">
+              {formatInr(v.annualCostPaise)}{' '}
+              <span className="text-xs font-normal text-muted-foreground">
+                ≈ {formatInr(v.annualCostPaise / 12)} / month
+              </span>
+            </span>
+          </Row>
+        </SheetCard>
         <SheetCard title="Project basics">
           <Row label="Client">{v.client.name}</Row>
           <Row label="Type">{p.type ?? '—'}</Row>
@@ -213,29 +232,6 @@ export function DetailsTab({ view: v }: { view: ProjectView }) {
             )}
           </SheetCard>
         )}
-
-        <SheetCard title="Running cost">
-          {costRows.map(([label, amount, cycle]) => (
-            <Row key={label} label={label}>
-              <span className="flex flex-wrap justify-between gap-2">
-                <span>
-                  {formatInr(amount)} / {monthly(cycle)}
-                </span>
-                <span className="text-xs text-muted-foreground">
-                  {formatInr(amount * (cycle === 'Monthly' ? 12 : 1))} / yr
-                </span>
-              </span>
-            </Row>
-          ))}
-          <Row label={<span className="font-semibold text-foreground">Total per year</span>}>
-            <span className="text-[15px] font-semibold">
-              {formatInr(v.annualCostPaise)}{' '}
-              <span className="text-xs font-normal text-muted-foreground">
-                ≈ {formatInr(v.annualCostPaise / 12)} / month
-              </span>
-            </span>
-          </Row>
-        </SheetCard>
 
         {!costsOnly && (
           <section className="min-w-0 rounded-xl border px-4 py-3">
